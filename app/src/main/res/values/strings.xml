@@ -1,0 +1,30 @@
+<resources>
+    <string name="app_name">BagcilarApp</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="home">Home</string>
+    <string name="report">Report</string>
+    <string name="my_reports">My Reports</string>
+    <string name="profile">Profile</string>
+    <string name="next">Next</string>
+    <string name="skip">Skip</string>
+    <string name="track_every_report">Track Every Report</string>
+    <string name="report_city_issues_easily">Report city issues easily.</string>
+    <string name="report_issue_description">Take a photo and notify us in\n just a few seconds.</string>
+    <string name="track_report_description">Receive updates and follow the\nstatus of your submitted reports.</string>
+    <string name="ai_smart_assistant">AI Smart Assistant</string>
+    <string name="ai_smart_assistant_description">Our AI analyzes your photo and\nautomatically prepares the report.</string>
+    <string name="get_started">Get Started</string>
+    <string name="bagcilar_municipality">Bağcılar Municipality</string>
+    <string name="municipality_desc">Welcome to our digital citizenship portal.</string>
+    <string name="already_have_an_account">Already have an account ?</string>
+    <string name="log_in">Log in</string>
+    <string name="full_name">Full Name</string>
+    <string name="mail">Mail</string>
+    <string name="phone_number">Phone Number</string>
+    <string name="confirmation_password">Confirmation Password</string>
+    <string name="terms">I accept Terms of Use and Privacy Policy</string>
+    <string name="don_t_have_an_account">Don\'t have an account?</string>
+    <string name="sign_up">Sign up</string>
+    <string name="email_adress">Email Adress</string>
+</resources>
