@@ -27,4 +27,8 @@
     <string name="don_t_have_an_account">Don\'t have an account?</string>
     <string name="sign_up">Sign up</string>
     <string name="email_adress">Email Adress</string>
+    <string name="civisense">CiviSense</string>
+    <string name="welcome_desc">Report issues, track requests and receive AI-powered assistance.</string>
+    <string name="create_account">Create Account</string>
+    <string name="continue_as_guest">Continue as guest</string>
 </resources>
