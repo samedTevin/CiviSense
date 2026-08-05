@@ -31,4 +31,9 @@
     <string name="welcome_desc">Report issues, track requests and receive AI-powered assistance.</string>
     <string name="create_account">Create Account</string>
     <string name="continue_as_guest">Continue as guest</string>
+    <string name="verify_your_email">Verify Your Email</string>
+    <string name="verify_desc">We\'ve sent a verification link to your email.\nPlease verify it to continue.</string>
+    <string name="i_ve_verified_my_email">I\'ve Verified My Email</string>
+    <string name="resend_email">Resend Email</string>
+    <string name="change_email">Change Email</string>
 </resources>

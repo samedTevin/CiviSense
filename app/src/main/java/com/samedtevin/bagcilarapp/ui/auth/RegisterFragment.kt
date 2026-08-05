@@ -41,6 +41,10 @@ class RegisterFragment : Fragment() {
             createAccount()
         }
 
+        binding.ibBackToLogin.setOnClickListener {
+            findNavController().popBackStack()
+        }
+
         // Navigation to Log in (Already have an account?)
         binding.tvLogIn.setOnClickListener {
             findNavController().navigate(R.id.action_registerFragment_to_loginFragment)
@@ -57,7 +61,12 @@ class RegisterFragment : Fragment() {
                 if (password == confirmPassword) {
                     firebaseAuth.createUserWithEmailAndPassword(email, password)
                         .addOnSuccessListener {
-                            findNavController().navigate(R.id.action_registerFragment_to_loginFragment)
+                            firebaseAuth.currentUser?.sendEmailVerification()?.addOnSuccessListener {
+                                Toast.makeText(requireContext(),"Verification email sent!",Toast.LENGTH_SHORT).show()
+                                findNavController().navigate(R.id.action_registerFragment_to_emailVerificationFragment)
+                            }?.addOnFailureListener { task ->
+                                Toast.makeText(requireContext(),"${task.message}",Toast.LENGTH_SHORT).show()
+                            }
                         }.addOnFailureListener { task ->
                             Toast.makeText(requireContext(), "${task.message}", Toast.LENGTH_SHORT).show()
                         }

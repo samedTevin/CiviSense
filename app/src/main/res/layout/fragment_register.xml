@@ -7,17 +7,18 @@
     android:orientation="vertical"
     android:gravity="center|top"
     tools:context=".ui.onboarding.viewpager.ReportIssueFragment"
-    android:layout_margin="20dp">
+    android:layout_margin="20dp"
+    android:background="@color/white">
 
     <ImageButton
         android:id="@+id/ibBackToLogin"
-        android:layout_width="60dp"
-        android:layout_height="60dp"
+        android:layout_width="45dp"
+        android:layout_height="45dp"
         android:layout_gravity="top"
         android:layout_marginBottom="30dp"
         android:scaleType="fitCenter"
         android:src="@drawable/outline_arrow_left_alt_24"
-        android:backgroundTint="@color/white"/>
+        android:background="@color/white"/>
 
     <TextView
         android:layout_width="wrap_content"
