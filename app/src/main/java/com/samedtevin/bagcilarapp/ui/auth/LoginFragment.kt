@@ -40,6 +40,15 @@ class LoginFragment : Fragment() {
             logIn()
         }
 
+        // Continue as guest
+        binding.tvContinueAsGuest.setOnClickListener {
+            continueAsGuest()
+        }
+
+        binding.ibBackToLogin.setOnClickListener {
+            findNavController().popBackStack()
+        }
+
 
         // Navigation to Register & Forgot Password
         // (Don't have an account?)
@@ -60,14 +69,44 @@ class LoginFragment : Fragment() {
             if (email.isNotEmpty() && password.isNotEmpty()) {
                 firebaseAuth.signInWithEmailAndPassword(email, password)
                     .addOnSuccessListener {
-                       findNavController().navigate(R.id.action_loginFragment_to_homeFragment)
+                        firebaseAuth.currentUser?.reload()?.addOnSuccessListener {
+                            if (firebaseAuth.currentUser?.isEmailVerified == true) {
+                                findNavController().navigate(R.id.action_loginFragment_to_homeFragment)
+                            } else {
+                                Toast.makeText(
+                                    requireContext(),
+                                    "Please verify your email first",
+                                    Toast.LENGTH_SHORT
+                                ).show()
+                                findNavController().navigate(R.id.action_loginFragment_to_emailVerificationFragment)
+                            }
+                        }?.addOnFailureListener { task ->
+                            Toast.makeText(requireContext(), "${task.message} aa", Toast.LENGTH_SHORT)
+                                .show()
+                        }
                     }.addOnFailureListener { task ->
-                        Toast.makeText(requireContext(),"${task.message}", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(requireContext(), "${task.message}", Toast.LENGTH_SHORT)
+                            .show()
                     }
             } else {
                 Toast.makeText(requireContext(), "All fields must be filled!", Toast.LENGTH_SHORT)
                     .show()
             }
+        }
+    }
+
+    private fun continueAsGuest(){
+        val user = firebaseAuth.currentUser
+
+        if(user != null){
+            firebaseAuth.signOut()
+        }
+
+        firebaseAuth.signInAnonymously().addOnSuccessListener {
+            Toast.makeText(requireContext(),"Signed in anonymously", Toast.LENGTH_SHORT).show()
+            findNavController().navigate(R.id.action_loginFragment_to_homeFragment)
+        }.addOnFailureListener { e ->
+            Toast.makeText(requireContext(),"${e.message}",Toast.LENGTH_SHORT).show()
         }
     }
 }

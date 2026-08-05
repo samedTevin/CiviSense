@@ -4,7 +4,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".ui.onboarding.viewpager.ViewPagerFragment">
+    tools:context=".ui.onboarding.viewpager.ViewPagerFragment"
+    android:background="@color/white">
 
    <androidx.viewpager2.widget.ViewPager2
       android:id="@+id/viewPager2"

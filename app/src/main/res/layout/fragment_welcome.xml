@@ -7,7 +7,8 @@ xmlns:app="http://schemas.android.com/apk/res-auto"
 android:orientation="vertical"
 android:gravity="center"
 tools:context=".ui.onboarding.WelcomeFragment"
-android:layout_margin="20dp">
+android:layout_margin="20dp"
+    android:background="@color/white">
 
 
 
@@ -84,23 +85,6 @@ android:layout_margin="20dp">
         android:layout_marginEnd="20dp"
         android:layout_marginStart="20dp"
         android:layout_marginBottom="10dp"/>
-
-    <com.google.android.material.divider.MaterialDivider
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:layout_marginBottom="40dp"
-        android:layout_marginStart="20dp"
-        android:layout_marginEnd="20dp"
-        />
-
-    <TextView
-        android:id="@+id/tvContinueAsGuest"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/continue_as_guest"
-        android:fontFamily="@font/poppins_medium"
-        android:textSize="15sp" />
 
 
 </LinearLayout>
