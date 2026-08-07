@@ -42,7 +42,7 @@ class SplashFragment : Fragment() {
 
             if (!isFinished) {
                 findNavController().navigate(R.id.action_splashFragment_to_viewPagerFragment)
-            } else if (firebaseAuth.currentUser != null) {
+            } else if (firebaseAuth.currentUser != null && firebaseAuth.currentUser?.isEmailVerified == true) {
                 findNavController().navigate(R.id.action_splashFragment_to_homeFragment)
             } else {
                 findNavController().navigate(R.id.action_splashFragment_to_welcomeFragment)

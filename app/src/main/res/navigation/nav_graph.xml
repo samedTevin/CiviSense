@@ -157,6 +157,9 @@
         <action
             android:id="@+id/action_emailVerificationFragment_to_loginFragment"
             app:destination="@id/loginFragment" />
+        <action
+            android:id="@+id/action_emailVerificationFragment_to_registerFragment"
+            app:destination="@id/registerFragment" />
     </fragment>
 
 </navigation>
