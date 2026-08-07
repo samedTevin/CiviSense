@@ -5,11 +5,14 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.viewpager2.widget.ViewPager2
 import com.samedtevin.bagcilarapp.R
 import com.samedtevin.bagcilarapp.adapter.viewpageradapter.ViewPagerAdapter
 import com.samedtevin.bagcilarapp.databinding.FragmentViewPagerBinding
+import com.samedtevin.bagcilarapp.session.ApplicationSession
+import kotlinx.coroutines.launch
 
 
 class ViewPagerFragment : Fragment() {
@@ -18,6 +21,13 @@ class ViewPagerFragment : Fragment() {
     private var _binding: FragmentViewPagerBinding? = null
     private val binding get() = _binding!!
     private lateinit var viewPagerAdapter: ViewPagerAdapter
+    private lateinit var applicationSession: ApplicationSession
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        applicationSession = ApplicationSession(requireContext())
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -49,13 +59,13 @@ class ViewPagerFragment : Fragment() {
                 binding.viewPager2.currentItem += 1
             }
             else{
-                findNavController().navigate(R.id.action_viewPagerFragment_to_welcomeFragment)
+                saveAndNavigate()
             }
         }
 
         // Skips the onboarding
         binding.btnSkip.setOnClickListener {
-            findNavController().navigate(R.id.action_viewPagerFragment_to_welcomeFragment)
+            saveAndNavigate()
         }
 
         changeTextOnButton()
@@ -75,5 +85,13 @@ class ViewPagerFragment : Fragment() {
             }
         })
     }
+
+    private fun saveAndNavigate(){
+        lifecycleScope.launch {
+            applicationSession.saveOnboardingPref(true)
+            findNavController().navigate(R.id.action_viewPagerFragment_to_welcomeFragment)
+        }
+    }
+
 
 }

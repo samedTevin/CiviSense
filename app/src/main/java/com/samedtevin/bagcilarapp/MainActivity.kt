@@ -3,10 +3,20 @@ package com.samedtevin.bagcilarapp
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.lifecycleScope
+import androidx.navigation.NavGraph
+import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
+import com.google.firebase.auth.FirebaseAuth
 import com.samedtevin.bagcilarapp.databinding.ActivityMainBinding
+import com.samedtevin.bagcilarapp.session.ApplicationSession
+import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.launch
 
+@AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
@@ -19,13 +29,15 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         // Nav Controller & Nav Host
-        val navHostFragment = supportFragmentManager.findFragmentById(R.id.fragmentContainerView) as NavHostFragment
+        val navHostFragment =
+            supportFragmentManager.findFragmentById(R.id.fragmentContainerView) as NavHostFragment
         val navController = navHostFragment.navController
 
         // Force set the graph to ensure start destination
         val navGraph = navController.navInflater.inflate(R.navigation.nav_graph)
         navGraph.setStartDestination(R.id.splashFragment)
         navController.graph = navGraph
+
 
         // Bottom Navigation
         binding.bottomNavigationView.setupWithNavController(navController)
@@ -35,6 +47,7 @@ class MainActivity : AppCompatActivity() {
                 R.id.splashFragment, R.id.viewPagerFragment, R.id.welcomeFragment, R.id.loginFragment, R.id.registerFragment, R.id.forgotPassword, R.id.emailVerificationFragment -> {
                     binding.bottomNavigationView.visibility = View.GONE
                 }
+
                 else -> {
                     binding.bottomNavigationView.visibility = View.VISIBLE
                 }
