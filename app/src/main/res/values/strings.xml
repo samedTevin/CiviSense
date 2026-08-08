@@ -36,4 +36,6 @@
     <string name="i_ve_verified_my_email">I\'ve Verified My Email</string>
     <string name="resend_email">Resend Email</string>
     <string name="change_email">Change Email</string>
+    <string name="i_accept">I accept</string>
+    <string name="terms_and_privacy_policy">" Terms and Privacy Policy"</string>
 </resources>

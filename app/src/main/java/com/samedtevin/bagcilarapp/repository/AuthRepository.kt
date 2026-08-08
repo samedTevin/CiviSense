@@ -14,6 +14,10 @@ class AuthRepository @Inject constructor(private val firebaseAuth: FirebaseAuth,
         firebaseFirestore.collection("users").document(uid).set(user).await()
     }
 
+    suspend fun deleteUser(uid: String){
+        firebaseFirestore.collection("users").document(uid).delete().await()
+    }
+
     suspend fun register(email: String, password: String){
         firebaseAuth.createUserWithEmailAndPassword(email, password).await()
     }

@@ -106,6 +106,8 @@ class AuthViewModel @Inject constructor(private val authRepository: AuthReposito
         viewModelScope.launch {
             _emailState.value = EmailVerificationState.Loading
             try{
+                val uid = authRepository.getUserUid()
+                authRepository.deleteUser(uid)
                 authRepository.changeEmail()
                 _emailState.value = EmailVerificationState.ChangeEmail("Account has been deleted. Register with your new email address.")
             }catch (e: Exception){

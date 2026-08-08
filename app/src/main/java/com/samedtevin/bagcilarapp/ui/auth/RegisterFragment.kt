@@ -17,6 +17,7 @@ import com.samedtevin.bagcilarapp.R
 import com.samedtevin.bagcilarapp.databinding.FragmentRegisterBinding
 import com.samedtevin.bagcilarapp.model.User
 import com.samedtevin.bagcilarapp.state.RegisterState
+import com.samedtevin.bagcilarapp.util.AlertDialog
 import com.samedtevin.bagcilarapp.viewmodel.AuthViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
@@ -52,6 +53,12 @@ class RegisterFragment : Fragment() {
         // Navigation to Log in (Already have an account?)
         binding.tvLogIn.setOnClickListener {
             findNavController().navigate(R.id.action_registerFragment_to_loginFragment)
+        }
+
+        binding.tvTermsAndPrivacy.setOnClickListener {
+            AlertDialog.showTermsAndPolicy(requireContext(),layoutInflater){ check ->
+                binding.checkBox.isChecked = check
+            }
         }
 
         collectRegisterState()
