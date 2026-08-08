@@ -23,6 +23,40 @@ class AuthRepository @Inject constructor(private val firebaseAuth: FirebaseAuth,
     }
 
     suspend fun verifyEmail(){
-        firebaseAuth.currentUser?.sendEmailVerification()?.await()
+        if(firebaseAuth.currentUser != null){
+            firebaseAuth.currentUser?.sendEmailVerification()?.await()
+        }
+    }
+
+    suspend fun loginUser(email: String, password: String){
+        firebaseAuth.signInWithEmailAndPassword(email, password).await()
+    }
+
+    suspend fun reloadUser(){
+        firebaseAuth.currentUser?.reload()?.await()
+    }
+
+    fun isEmailVerified(): Boolean{
+        return firebaseAuth.currentUser?.isEmailVerified == true
+    }
+
+    suspend fun loginAsAnon(){
+        val user = firebaseAuth.currentUser
+        if(user != null){
+            firebaseAuth.signOut()
+        }
+        firebaseAuth.signInAnonymously().await()
+    }
+
+    suspend fun resetPassword(email: String){
+        firebaseAuth.sendPasswordResetEmail(email).await()
+    }
+
+    suspend fun changeEmail(){
+        val user = firebaseAuth.currentUser
+        if(user != null){
+            user.delete().await()
+            firebaseAuth.signOut()
+        }
     }
 }
