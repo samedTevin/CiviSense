@@ -1,14 +1,382 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".ui.main.detail.ReportReviewFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+   <androidx.constraintlayout.widget.ConstraintLayout
+       android:layout_width="match_parent"
+       android:layout_height="match_parent">
 
-</FrameLayout>
+       <Toolbar
+           android:id="@+id/toolBar"
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           app:layout_constraintTop_toTopOf="parent"
+           app:layout_constraintStart_toStartOf="parent"
+           app:layout_constraintEnd_toEndOf="parent"
+           android:gravity="center_vertical"
+           android:layout_marginTop="15dp"
+           >
+           <ImageButton
+               android:layout_width="60dp"
+               android:layout_height="60dp"
+               android:src="@drawable/outline_arrow_left_alt_24"
+               android:layout_gravity="center|start"
+               android:scaleType="centerCrop"
+               android:backgroundTint="@color/white" />
+
+           <ImageView
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:src="@drawable/ic_bagcilar_logo_horizontal"
+               android:layout_gravity="center"
+               android:scaleType="centerCrop"/>
+
+       </Toolbar>
+
+       <TextView
+           android:id="@+id/tvReviewReport"
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:text="Review Report"
+           android:textSize="25sp"
+           android:fontFamily="@font/poppins_semibold"
+           android:textColor="@color/black"
+           app:layout_constraintTop_toBottomOf="@id/toolBar"
+           app:layout_constraintStart_toStartOf="parent"
+           android:layout_marginStart="25dp"
+           android:layout_marginTop="20dp"/>
+
+       <TextView
+           android:id="@+id/tvReviewDesc"
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:text="We've understood your problem. Check\n the details before sending."
+           android:fontFamily="@font/poppins"
+           android:textSize="18sp"
+           app:layout_constraintTop_toBottomOf="@id/tvReviewReport"
+           app:layout_constraintStart_toStartOf="parent"
+           android:layout_marginStart="25dp"/>
+
+       <com.google.android.material.card.MaterialCardView
+           android:id="@+id/tvAiAnalysis"
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           app:layout_constraintTop_toBottomOf="@id/tvReviewDesc"
+           app:layout_constraintStart_toStartOf="parent"
+           app:layout_constraintEnd_toEndOf="parent"
+           android:layout_margin="20dp"
+           app:cardCornerRadius="18dp"
+           android:backgroundTint="#D3E0FA">
+           <LinearLayout
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:orientation="vertical"
+               android:layout_margin="20dp">
+               <TextView
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:text="✦ AI ANALYSIS"
+                   android:textSize="18sp"
+                   android:fontFamily="@font/poppins_semibold"
+                   android:textColor="@color/bagcilar_dark_blue"/>
+               <LinearLayout
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:orientation="horizontal"
+                   android:layout_marginTop="5dp"
+                   >
+                   <LinearLayout
+                       android:layout_width="wrap_content"
+                       android:layout_height="wrap_content"
+                       android:orientation="vertical">
+                       <TextView
+                           android:layout_width="wrap_content"
+                           android:layout_height="wrap_content"
+                           android:text="Category"
+                           android:fontFamily="@font/poppins"
+                           android:textSize="18sp"/>
+
+                       <com.google.android.material.chip.Chip
+                           android:layout_width="wrap_content"
+                           android:layout_height="wrap_content"
+                           android:text="Street Lighting"
+                           android:textSize="16sp"
+                           android:fontFamily="@font/poppins"/>
+                   </LinearLayout>
+
+                   <View
+                       android:layout_width="40dp"
+                       android:layout_height="match_parent"/>
+
+                   <LinearLayout
+                       android:layout_width="wrap_content"
+                       android:layout_height="wrap_content"
+                       android:orientation="vertical">
+                       <TextView
+                           android:layout_width="wrap_content"
+                           android:layout_height="wrap_content"
+                           android:text="Priority"
+                           android:fontFamily="@font/poppins"
+                           android:textSize="18sp"/>
+                       <com.google.android.material.chip.Chip
+                           android:layout_width="wrap_content"
+                           android:layout_height="wrap_content"
+                           android:text="Medium"
+                           android:textSize="16sp"
+                           android:fontFamily="@font/poppins"/>
+                   </LinearLayout>
+               </LinearLayout>
+
+               <com.google.android.material.divider.MaterialDivider
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   app:dividerColor="@color/bagcilar_dark_blue"
+                   android:layout_marginTop="10dp"
+                   android:layout_marginBottom="10dp"
+                   />
+
+               <TextView
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:text="Summary"
+                   android:textSize="18sp"
+                   android:fontFamily="@font/poppins"/>
+
+               <TextView
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:text="Street light is not working near the reported location."
+                   android:textSize="16sp"
+                   android:fontFamily="@font/poppins"/>
+           </LinearLayout>
+       </com.google.android.material.card.MaterialCardView>
+
+
+       <TextView
+           android:id="@+id/tvReportDetails"
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:text="Report Details"
+           android:textSize="20sp"
+           android:fontFamily="@font/poppins_semibold"
+           android:layout_marginStart="20dp"
+           android:layout_marginTop="20dp"
+           app:layout_constraintTop_toBottomOf="@id/tvAiAnalysis"
+           app:layout_constraintStart_toStartOf="parent"/>
+
+       <com.google.android.material.card.MaterialCardView
+           android:id="@+id/cvReportDetails"
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           android:backgroundTint="@color/white"
+           android:elevation="4dp"
+           app:cardCornerRadius="18dp"
+           android:layout_margin="20dp"
+           app:layout_constraintTop_toBottomOf="@id/tvReportDetails"
+           app:layout_constraintStart_toStartOf="parent"
+           app:layout_constraintEnd_toEndOf="parent">
+
+           <LinearLayout
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:orientation="vertical"
+               android:layout_margin="20dp">
+
+               <LinearLayout
+                   android:layout_width="match_parent"
+                   android:layout_height="wrap_content"
+                   android:orientation="horizontal">
+                   <ImageView
+                       android:layout_width="30dp"
+                       android:layout_height="30dp"
+                       android:src="@drawable/outline_location_on_24"
+                       android:layout_gravity="center"/>
+
+                   <LinearLayout
+                       android:layout_width="wrap_content"
+                       android:layout_height="wrap_content"
+                       android:orientation="vertical"
+                       android:layout_marginStart="10dp"
+                       >
+                       <TextView
+                           android:layout_width="wrap_content"
+                           android:layout_height="wrap_content"
+                           android:text="Location"
+                           android:textSize="14sp"
+                           android:fontFamily="@font/poppins"/>
+                       <TextView
+                           android:layout_width="wrap_content"
+                           android:layout_height="wrap_content"
+                           android:text="Mahmutbey St."
+                           android:textSize="14sp"
+                           android:fontFamily="@font/poppins_medium"/>
+
+                   </LinearLayout>
+
+
+
+
+               </LinearLayout>
+
+               <View
+                   android:layout_width="match_parent"
+                   android:layout_height="1dp"
+                   android:layout_marginVertical="20dp"
+                   android:background="#D9D9D9" />
+
+               <LinearLayout
+                   android:layout_width="match_parent"
+                   android:layout_height="wrap_content"
+                   android:orientation="horizontal">
+                   <ImageView
+                       android:layout_width="30dp"
+                       android:layout_height="30dp"
+                       android:src="@drawable/baseline_photo_camera_24"
+                       android:layout_gravity="center"/>
+
+                   <LinearLayout
+                       android:layout_width="wrap_content"
+                       android:layout_height="wrap_content"
+                       android:orientation="vertical"
+                       android:layout_marginStart="10dp"
+                       android:layout_weight="1"
+                       >
+                       <TextView
+                           android:layout_width="wrap_content"
+                           android:layout_height="wrap_content"
+                           android:text="Photos"
+                           android:textSize="14sp"
+                           android:fontFamily="@font/poppins"/>
+                       <TextView
+                           android:layout_width="wrap_content"
+                           android:layout_height="wrap_content"
+                           android:text="2 photos attached"
+                           android:textSize="14sp"
+                           android:fontFamily="@font/poppins_medium"
+                           android:layout_marginBottom="10dp" />
+                   </LinearLayout>
+
+               </LinearLayout>
+               <LinearLayout
+                   android:layout_width="match_parent"
+                   android:layout_height="wrap_content"
+                   android:orientation="horizontal"
+                   android:gravity="center"
+                   >
+                   <ImageView
+                       android:layout_width="100dp"
+                       android:layout_height="100dp"
+                       android:src="@drawable/bagcilar"
+                       android:scaleType="centerCrop"
+                       android:layout_marginEnd="30dp"
+                       />
+
+                   <ImageView
+                       android:layout_width="100dp"
+                       android:layout_height="100dp"
+                       android:src="@drawable/bagcilar"
+                       android:scaleType="centerCrop"
+                       android:layout_marginEnd="20dp"
+                       />
+
+               </LinearLayout>
+
+               <View
+                   android:layout_width="match_parent"
+                   android:layout_height="1dp"
+                   android:layout_marginVertical="20dp"
+                   android:background="#D9D9D9" />
+
+               <LinearLayout
+                   android:layout_width="match_parent"
+                   android:layout_height="wrap_content"
+                   android:orientation="horizontal">
+                   <ImageView
+                       android:layout_width="30dp"
+                       android:layout_height="match_parent"
+                       android:src="@drawable/outline_format_quote_24"/>
+
+                   <LinearLayout
+                       android:layout_width="wrap_content"
+                       android:layout_height="wrap_content"
+                       android:orientation="vertical"
+                       android:layout_marginStart="10dp"
+                       android:layout_weight="1"
+                       >
+                       <TextView
+                           android:layout_width="wrap_content"
+                           android:layout_height="wrap_content"
+                           android:text="Your Note"
+                           android:textSize="14sp"
+                           android:fontFamily="@font/poppins"/>
+                       <TextView
+                           android:layout_width="wrap_content"
+                           android:layout_height="wrap_content"
+                           android:text="The street light has not been working for two days. It makes the corner very dark and unsafe for pedestrians."
+                           android:textSize="14sp"
+                           android:fontFamily="@font/poppins_medium"
+                           android:layout_marginStart="10dp"
+                           android:layout_marginTop="10dp"
+                           android:textStyle="italic"/>
+
+                   </LinearLayout>
+               </LinearLayout>
+
+
+           </LinearLayout>
+
+       </com.google.android.material.card.MaterialCardView>
+
+       <com.google.android.material.button.MaterialButton
+           android:id="@+id/btnSubmit"
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           android:text="Submit Report"
+           android:textSize="20sp"
+           android:textAlignment="center"
+           app:icon="@drawable/baseline_check_24"
+           app:iconSize="30dp"
+           app:iconGravity="textEnd"
+           android:fontFamily="@font/poppins_semibold"
+           android:backgroundTint="@color/bagcilar_dark_blue"
+           app:strokeColor="@color/bagcilar_light_blue"
+           app:strokeWidth="3dp"
+           android:elevation="4dp"
+           app:cornerRadius="4dp"
+           app:layout_constraintTop_toBottomOf="@id/cvReportDetails"
+           app:layout_constraintStart_toStartOf="parent"
+           app:layout_constraintEnd_toEndOf="parent"
+           android:layout_marginTop="30dp"
+           android:layout_marginBottom="10dp"
+           android:layout_marginStart="20dp"
+           android:layout_marginEnd="20dp"/>
+
+       <com.google.android.material.button.MaterialButton
+           android:id="@+id/btnEdit"
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           android:text="Edit Details"
+           android:textSize="20sp"
+           android:textAlignment="center"
+
+           android:fontFamily="@font/poppins_semibold"
+           android:backgroundTint="@color/bagcilar_light_blue"
+           app:strokeColor="@color/bagcilar_dark_blue"
+           app:strokeWidth="3dp"
+           android:elevation="4dp"
+           app:cornerRadius="4dp"
+           app:layout_constraintTop_toBottomOf="@id/btnSubmit"
+           app:layout_constraintStart_toStartOf="parent"
+           app:layout_constraintEnd_toEndOf="parent"
+           app:layout_constraintBottom_toBottomOf="parent"
+           android:layout_marginTop="10dp"
+           android:layout_marginBottom="10dp"
+           android:layout_marginStart="20dp"
+           android:layout_marginEnd="20dp"/>
+   </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.core.widget.NestedScrollView>

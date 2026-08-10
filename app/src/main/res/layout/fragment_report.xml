@@ -217,6 +217,7 @@
             android:textSize="20sp"
             android:textAlignment="center"
             app:icon="@drawable/outline_arrow_right_alt_24"
+            app:iconSize="30dp"
             app:iconGravity="textEnd"
             android:fontFamily="@font/poppins_semibold"
             android:backgroundTint="@color/bagcilar_dark_blue"
