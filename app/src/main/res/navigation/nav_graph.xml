@@ -96,6 +96,9 @@
         <action
             android:id="@+id/action_reportFragment_to_profileFragment"
             app:destination="@id/profileFragment" />
+        <action
+            android:id="@+id/action_reportFragment_to_reportReviewFragment"
+            app:destination="@id/reportReviewFragment" />
     </fragment>
     <fragment
         android:id="@+id/registerFragment"
@@ -161,5 +164,10 @@
             android:id="@+id/action_emailVerificationFragment_to_registerFragment"
             app:destination="@id/registerFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/reportReviewFragment"
+        android:name="com.samedtevin.bagcilarapp.ui.main.detail.ReportReviewFragment"
+        android:label="fragment_report_review"
+        tools:layout="@layout/fragment_report_review" />
 
 </navigation>
