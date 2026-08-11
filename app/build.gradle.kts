@@ -72,4 +72,7 @@ dependencies {
     ksp(libs.hilt.compiler)
 
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-play-services:1.10.2")
+
+    // Glide
+    implementation("com.github.bumptech.glide:glide:5.0.5")
 }

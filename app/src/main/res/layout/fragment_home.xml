@@ -21,6 +21,7 @@
             android:layout_marginTop="15dp"
             >
             <ImageButton
+                android:id="@+id/btnNavigationDrawer"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
                 android:src="@drawable/outline_menu_24"
@@ -150,6 +151,7 @@
             android:layout_margin="10dp"
             android:gravity="center">
             <com.google.android.material.card.MaterialCardView
+                android:id="@+id/cardMyReports"
                 android:layout_width="150dp"
                 android:layout_height="wrap_content"
                 android:layout_margin="20dp">
@@ -163,9 +165,10 @@
                     android:gravity="center">
 
                     <ImageView
-                        android:layout_width="50dp"
+                        android:layout_width="80dp"
                         android:layout_height="50dp"
-                        android:src="@drawable/outline_add_24"
+                        android:src="@drawable/ic_bagcilar_my_reports"
+                        android:scaleType="centerCrop"
                         android:layout_marginBottom="10dp"
                         />
                     <TextView
@@ -188,6 +191,7 @@
             </com.google.android.material.card.MaterialCardView>
 
             <com.google.android.material.card.MaterialCardView
+                android:id="@+id/cardAskGemini"
                 android:layout_width="150dp"
                 android:layout_height="wrap_content"
                 android:layout_margin="20dp">
@@ -417,6 +421,7 @@
             app:layout_constraintStart_toStartOf="parent"/>
 
         <TextView
+            android:id="@+id/tvViewAll"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="View >"
@@ -431,7 +436,7 @@
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/cvLatestAnnouncements"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             app:layout_constraintTop_toBottomOf="@id/tvLatestAnnouncements"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -439,55 +444,62 @@
             app:cardCornerRadius="18dp"
             android:layout_margin="20dp">
 
-            <LinearLayout
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
+                android:layout_height="match_parent"
+                android:layout_margin="20dp">
+
                 <ImageView
+                    android:id="@+id/ivAnnouncement"
                     android:layout_width="match_parent"
                     android:layout_height="200dp"
                     android:src="@drawable/bagcilar"
                     android:scaleType="centerCrop"
-                    />
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:layout_margin="10dp">
-                    <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Safest City"
-                    android:fontFamily="@font/poppins_semibold"
-                    android:textSize="20sp"/>
-
-                    <View
-                        android:layout_width="120dp"
-                        android:layout_height="match_parent"/>
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Aug 26, 2026"
-                        android:textSize="18sp"
-                        android:fontFamily="@font/poppins"
-                        android:textAlignment="center" />
-
-                </LinearLayout>
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"/>
 
                 <TextView
+                    android:id="@+id/tvAnnouncementTitle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="The municipality has launched several new infrastructure projects aimed at improving daily life for all residents of Bağcılar..."
+                    android:text="Title"
+                    android:textSize="20sp"
+                    android:fontFamily="@font/poppins_semibold"
+                    app:layout_constraintTop_toBottomOf="@id/ivAnnouncement"
+                    app:layout_constraintStart_toStartOf="parent"
+                    android:layout_marginTop="10dp"
+                     />
+
+                <TextView
+                    android:id="@+id/tvAnnouncementDate"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="16 Aug 2026"
+                    android:textSize="16sp"
+                    android:fontFamily="@font/poppins"
+                    app:layout_constraintTop_toBottomOf="@id/ivAnnouncement"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginStart="5dp"/>
+
+                <TextView
+                    android:id="@+id/tvAnnouncementDescription"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="aaaaaaaaaaaa"
                     android:textSize="14sp"
                     android:fontFamily="@font/poppins"
-                    android:layout_marginStart="10dp"
-                    android:layout_marginEnd="10dp"
-                    android:layout_marginBottom="10dp"/>
-            </LinearLayout>
+                    android:maxLines="3"
+                    app:layout_constraintTop_toBottomOf="@id/tvAnnouncementTitle"
+                    app:layout_constraintStart_toStartOf="parent"
+                    android:layout_marginTop="10dp"/>
 
+            </androidx.constraintlayout.widget.ConstraintLayout>
         </com.google.android.material.card.MaterialCardView>
     </androidx.constraintlayout.widget.ConstraintLayout>
+
+
 
 
 </androidx.core.widget.NestedScrollView>

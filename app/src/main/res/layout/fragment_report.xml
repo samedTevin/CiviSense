@@ -161,8 +161,7 @@
                     <ImageView
                         android:layout_width="50dp"
                         android:layout_height="50dp"
-                        android:src="@drawable/outline_add_a_photo_24"
-                        app:tint="@color/bagcilar_dark_blue"
+                        android:src="@drawable/ic_bagcilar_add_photo"
                         android:layout_marginBottom="10dp"
                         />
                     <TextView
@@ -191,9 +190,9 @@
                     android:layout_marginTop="20dp">
 
                     <ImageView
-                        android:layout_width="match_parent"
+                        android:layout_width="50dp"
                         android:layout_height="50dp"
-                        android:src="@drawable/outline_location_on_24"
+                        android:src="@drawable/ic_bagcilar_location"
                         android:layout_marginBottom="10dp"
                         />
 
