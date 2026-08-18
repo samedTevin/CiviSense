@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:cardCornerRadius="10dp"
+    android:elevation="4dp"
+    android:backgroundTint="@color/white"
+    android:layout_margin="20dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_margin="10dp"
+        android:gravity="start">
+
+        <ImageView
+            android:id="@+id/ivAnnouncement"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:src="@drawable/bagcilar"
+            android:scaleType="centerCrop"/>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:layout_marginStart="10dp">
+            <TextView
+                android:id="@+id/tvTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Title"
+                android:fontFamily="@font/poppins_semibold"
+                android:textSize="20sp"/>
+
+            <TextView
+                android:id="@+id/tvDate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="16 Aug 2026"
+                android:fontFamily="@font/poppins"
+                android:textSize="14sp"
+                android:layout_marginTop="5dp"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:gravity="end|center_vertical">
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:src="@drawable/outline_chevron_forward_24"
+                app:tint="@color/black" />
+        </LinearLayout>
+
+       
+
+    </LinearLayout>
+
+</com.google.android.material.card.MaterialCardView>

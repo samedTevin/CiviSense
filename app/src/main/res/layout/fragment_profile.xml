@@ -1,14 +1,344 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.main.ProfileFragment">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".ui.main.ProfileFragment"
+    android:background="@color/white">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <Toolbar
+        android:id="@+id/toolBar"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:gravity="center_vertical"
+        android:layout_marginTop="15dp"
+        >
+        <ImageButton
+            android:id="@+id/btnNavigationDrawer"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:src="@drawable/outline_menu_24"
+            android:layout_gravity="center|start"
+            android:scaleType="centerCrop"
+            android:backgroundTint="@color/white" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Profile"
+            android:textSize="25sp"
+            android:fontFamily="@font/poppins_semibold"
+            android:textColor="@color/bagcilar_dark_blue"
+            android:layout_gravity="center_horizontal" />
 
-</FrameLayout>
+        <ImageButton
+            android:id="@+id/btnLogOut"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:src="@drawable/outline_logout_24"
+            android:layout_gravity="center|end"
+            android:scaleType="centerCrop"
+            android:backgroundTint="@color/white"
+            android:layout_marginEnd="10dp"/>
+    </Toolbar>
+
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/ivProfilePhoto"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        app:layout_constraintTop_toBottomOf="@id/toolBar"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="10dp"
+        android:src="@drawable/bagcilar"
+        android:scaleType="centerCrop"
+        android:padding="5dp"
+        app:strokeWidth="2dp"
+        app:strokeColor="@color/bagcilar_light_blue"
+        app:shapeAppearance="@style/CircleImageView"/>
+
+    <TextView
+        android:id="@+id/tvFullName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Samed Tevin"
+        android:textSize="25sp"
+        android:fontFamily="@font/poppins_semibold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/ivProfilePhoto"
+        android:layout_marginTop="10dp"/>
+    <TextView
+        android:id="@+id/tvEmail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="s@gmail.com"
+        android:textSize="15sp"
+        android:fontFamily="@font/poppins"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvFullName"/>
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/cvStatistics"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/tvEmail"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="10dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        app:cardElevation="4dp"
+        app:cardBackgroundColor="@color/white">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_margin="10dp"
+            android:gravity="center">
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="30dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginEnd="10dp"
+                app:cardBackgroundColor="#F2F3F9"
+                >
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:layout_margin="10dp">
+                    <TextView
+                        android:id="@+id/tvReportCount"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="12"
+                        android:textSize="25sp"
+                        android:fontFamily="@font/poppins_semibold"
+                        android:textColor="@color/bagcilar_dark_blue"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Reports"
+                        android:textSize="18sp"
+                        android:fontFamily="@font/poppins_medium"/>
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="30dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                app:cardBackgroundColor="#F2F3F9"
+                >
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:layout_margin="10dp">
+                    <TextView
+                        android:id="@+id/tvResolvedCount"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="8"
+                        android:textSize="25sp"
+                        android:fontFamily="@font/poppins_semibold"
+                        android:textColor="@color/bagcilar_dark_blue"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Resolved"
+                        android:textSize="18sp"
+                        android:fontFamily="@font/poppins_medium"
+                        />
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+        </LinearLayout>
+    </com.google.android.material.card.MaterialCardView>
+
+    <TextView
+        android:id="@+id/tvAccount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Account"
+        android:textSize="15sp"
+        android:fontFamily="@font/poppins_medium"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
+        app:layout_constraintTop_toBottomOf="@id/cvStatistics"
+        app:layout_constraintStart_toStartOf="parent"/>
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/cvAccount"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        app:layout_constraintTop_toBottomOf="@id/tvAccount"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:cardBackgroundColor="@color/white"
+        app:cardElevation="4dp">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:layout_margin="10dp">
+            <ImageView
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:src="@drawable/outline_person_24"
+                android:layout_marginEnd="10dp"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Personal Information"
+                android:textSize="15sp"
+                android:fontFamily="@font/poppins"
+                android:drawableEnd="@drawable/outline_chevron_forward_24"
+                android:drawableTint="@color/bagcilar_dark_blue"/>
+
+        </LinearLayout>
+    </com.google.android.material.card.MaterialCardView>
+
+    <TextView
+        android:id="@+id/tvAppSettings"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="App Settings"
+        android:textSize="15sp"
+        android:fontFamily="@font/poppins_medium"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
+        app:layout_constraintTop_toBottomOf="@id/cvAccount"
+        app:layout_constraintStart_toStartOf="parent"/>
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/cvApperance"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        app:layout_constraintTop_toBottomOf="@id/tvAppSettings"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:cardBackgroundColor="@color/white"
+        app:cardElevation="4dp">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:layout_margin="10dp">
+            <ImageView
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:src="@drawable/outline_dark_mode_24"
+                android:layout_marginEnd="10dp"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Apperance"
+                android:textSize="15sp"
+                android:fontFamily="@font/poppins"
+                android:drawableEnd="@drawable/outline_chevron_forward_24"
+                android:drawableTint="@color/bagcilar_dark_blue"/>
+
+        </LinearLayout>
+    </com.google.android.material.card.MaterialCardView>
+
+    <TextView
+        android:id="@+id/tvSupport"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Support"
+        android:textSize="15sp"
+        android:fontFamily="@font/poppins_medium"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
+        app:layout_constraintTop_toBottomOf="@id/cvApperance"
+        app:layout_constraintStart_toStartOf="parent"/>
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/cvSupport"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        app:layout_constraintTop_toBottomOf="@id/tvSupport"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:cardBackgroundColor="@color/white"
+        app:cardElevation="4dp">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:layout_margin="10dp">
+            <ImageView
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:src="@drawable/outline_question_mark_24"
+                android:layout_marginEnd="10dp"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Help and Support"
+                android:textSize="15sp"
+                android:fontFamily="@font/poppins"
+                android:drawableEnd="@drawable/outline_chevron_forward_24"
+                android:drawableTint="@color/bagcilar_dark_blue"/>
+
+        </LinearLayout>
+    </com.google.android.material.card.MaterialCardView>
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/cvAbout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginTop="10dp"
+        app:layout_constraintTop_toBottomOf="@id/cvSupport"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:cardBackgroundColor="@color/white"
+        app:cardElevation="4dp">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:layout_margin="10dp">
+            <ImageView
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:src="@drawable/outline_info_24"
+                android:layout_marginEnd="10dp"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="About"
+                android:textSize="15sp"
+                android:fontFamily="@font/poppins"
+                android:drawableEnd="@drawable/outline_chevron_forward_24"
+                android:drawableTint="@color/bagcilar_dark_blue"/>
+
+        </LinearLayout>
+    </com.google.android.material.card.MaterialCardView>
+    
+
+</androidx.constraintlayout.widget.ConstraintLayout>

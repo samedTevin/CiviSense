@@ -5,6 +5,7 @@ import android.content.Context
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.view.LayoutInflater
+import com.samedtevin.bagcilarapp.databinding.AlertDialogAppearenceBinding
 import com.samedtevin.bagcilarapp.databinding.AlertDialogTermsAndPolicyBinding
 
 object AlertDialog {
@@ -27,5 +28,15 @@ object AlertDialog {
             onClick(false)
             dialog.dismiss()
         }
+    }
+
+    fun showAppearence(context: Context, layoutInflater: LayoutInflater){
+
+        val binding = AlertDialogAppearenceBinding.inflate(layoutInflater)
+        val dialog = AlertDialog.Builder(context).setView(binding.root).create()
+
+        dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+
+        dialog.show()
     }
 }

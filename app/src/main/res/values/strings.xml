@@ -38,4 +38,6 @@
     <string name="change_email">Change Email</string>
     <string name="i_accept">I accept</string>
     <string name="terms_and_privacy_policy">" Terms and Privacy Policy"</string>
+    <string name="open_nav">Open Navigation Drawer</string>
+    <string name="close_nav">Close Navigation Drawer</string>
 </resources>

@@ -47,9 +47,21 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        binding.btnReportIssue.setOnClickListener { 
+            findNavController().navigate(R.id.action_homeFragment_to_reportFragment)
+        }
+
         // Navigate to the My Reports
         binding.cardMyReports.setOnClickListener {
             findNavController().navigate(R.id.action_homeFragment_to_myReportsFragment)
+        }
+
+        binding.cardAskGemini.setOnClickListener {
+            findNavController().navigate(R.id.action_homeFragment_to_smartAssistantFragment)
+        }
+
+        binding.tvViewAll.setOnClickListener {
+            findNavController().navigate(R.id.action_homeFragment_to_announcementsFragment)
         }
 
         collectUser()

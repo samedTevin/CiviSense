@@ -1,0 +1,246 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".ui.main.detail.AboutFragment"
+    android:background="@color/white">
+
+    <Toolbar
+        android:id="@+id/toolBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:gravity="center_vertical"
+        android:layout_marginTop="15dp"
+        >
+        <ImageButton
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:src="@drawable/outline_arrow_left_alt_24"
+            android:layout_gravity="center|start"
+            android:scaleType="centerCrop"
+            android:backgroundTint="@color/white" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="About"
+            android:textSize="25sp"
+            android:fontFamily="@font/poppins_semibold"
+            android:textColor="@color/bagcilar_dark_blue"
+            android:layout_gravity="center_horizontal" />
+    </Toolbar>
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/cvLogo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:cardBackgroundColor="@color/white"
+        app:cardElevation="4dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/toolBar"
+        android:layout_margin="20dp"
+        >
+
+        <ImageView
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:src="@drawable/ic_bagcilar_logo"
+            android:scaleType="centerCrop"
+            android:layout_gravity="center"
+            android:padding="5dp"/>
+    </com.google.android.material.card.MaterialCardView>
+
+    <TextView
+        android:id="@+id/tvTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Bağcılar Municipality"
+        android:fontFamily="@font/poppins_semibold"
+        android:textSize="22sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/cvLogo"
+        android:layout_marginTop="20dp"/>
+
+    <TextView
+        android:id="@+id/tvDesc"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="MAKING OUR CITY BETTER"
+        android:textSize="15sp"
+        android:fontFamily="@font/poppins_medium"
+        app:layout_constraintTop_toBottomOf="@id/tvTitle"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/cvMenu"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardElevation="4dp"
+        app:cardCornerRadius="18dp"
+        app:cardBackgroundColor="@color/white"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvDesc"
+        android:layout_margin="20dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+           <LinearLayout
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:orientation="horizontal"
+               android:padding="10dp"
+               android:gravity="center_vertical">
+               <ImageView
+                   android:layout_width="40dp"
+                   android:layout_height="40dp"
+                   android:src="@drawable/outline_info_24"
+                   android:layout_marginEnd="10dp"/>
+               <TextView
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:text="About the App"
+                   android:textSize="16sp"
+                   android:fontFamily="@font/poppins_semibold"
+                   android:layout_weight="1"/>
+
+               <ImageView
+                   android:layout_width="30dp"
+                   android:layout_height="30dp"
+                   android:src="@drawable/outline_chevron_forward_24"
+                   android:tint="@color/black"/>
+           </LinearLayout>
+            <com.google.android.material.divider.MaterialDivider
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="10dp"
+                android:gravity="center_vertical">
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:src="@drawable/outline_lab_profile_24"
+                    android:layout_marginEnd="10dp"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Terms of Use"
+                    android:textSize="16sp"
+                    android:fontFamily="@font/poppins_semibold"
+                    android:layout_weight="1"/>
+
+                <ImageView
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:src="@drawable/outline_chevron_forward_24"
+                    android:tint="@color/black"/>
+            </LinearLayout>
+            <com.google.android.material.divider.MaterialDivider
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="10dp"
+                android:gravity="center_vertical">
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:src="@drawable/outline_privacy_tip_24"
+                    android:layout_marginEnd="10dp"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Privacy Policy"
+                    android:textSize="16sp"
+                    android:fontFamily="@font/poppins_semibold"
+                    android:layout_weight="1"/>
+
+                <ImageView
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:src="@drawable/outline_chevron_forward_24"
+                    android:tint="@color/black"/>
+            </LinearLayout>
+        </LinearLayout>
+
+    </com.google.android.material.card.MaterialCardView>
+
+    <TextView
+        android:id="@+id/tvConnect"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="CONNECT WITH US"
+        android:textSize="14sp"
+        android:fontFamily="@font/poppins_semibold"
+        app:layout_constraintTop_toBottomOf="@id/cvMenu"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="20dp"/>
+
+    <LinearLayout
+        android:id="@+id/layoutSocial"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvConnect"
+        android:gravity="center"
+        android:layout_marginTop="10dp">
+        <com.google.android.material.imageview.ShapeableImageView
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@drawable/ic_youtube"
+            android:scaleType="centerCrop"
+            app:shapeAppearance="@style/CircleImageView"
+            android:layout_marginEnd="10dp"/>
+        <com.google.android.material.imageview.ShapeableImageView
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@drawable/ic_facebook"
+            android:scaleType="centerCrop"
+            app:shapeAppearance="@style/CircleImageView"
+            android:layout_marginEnd="10dp"/>
+        <com.google.android.material.imageview.ShapeableImageView
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@drawable/ic_whatsapp"
+            android:scaleType="centerCrop"
+            app:shapeAppearance="@style/CircleImageView"
+            android:layout_marginEnd="10dp"/>
+        <com.google.android.material.imageview.ShapeableImageView
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@drawable/ic_instagram"
+            android:scaleType="centerCrop"
+            app:shapeAppearance="@style/CircleImageView"/>
+    </LinearLayout>
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:src="@drawable/ic_bagcilar_building"
+        android:scaleType="centerCrop"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

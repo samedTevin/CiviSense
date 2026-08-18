@@ -1,0 +1,250 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".ui.main.detail.PersonalInformationFragment"
+    android:background="@color/white">
+    <Toolbar
+        android:id="@+id/toolBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:gravity="center_vertical"
+        android:layout_marginTop="15dp"
+        >
+        <ImageButton
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:src="@drawable/outline_arrow_left_alt_24"
+            android:layout_gravity="center|start"
+            android:scaleType="centerCrop"
+            android:backgroundTint="@color/white" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Personal Information"
+            android:textSize="25sp"
+            android:fontFamily="@font/poppins_semibold"
+            android:textColor="@color/bagcilar_dark_blue"
+            android:layout_gravity="center_horizontal" />
+
+
+        <ImageButton
+            android:id="@+id/btnDelete"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:src="@drawable/outline_delete_24"
+            android:layout_gravity="center|end"
+            android:scaleType="centerCrop"
+            android:backgroundTint="@color/white"
+            android:layout_marginEnd="10dp"/>
+    </Toolbar>
+
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/ivProfilePhoto"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:scaleType="centerCrop"
+        app:shapeAppearance="@style/CircleImageView"
+        android:src="@drawable/bagcilar"
+        app:strokeWidth="2dp"
+        app:strokeColor="@color/bagcilar_dark_blue"
+        android:padding="5dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/toolBar"
+        android:layout_marginTop="10dp"/>
+
+    <TextView
+        android:id="@+id/tvFullName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Samed Tevin"
+        android:fontFamily="@font/poppins_semibold"
+        android:textSize="16sp"
+        app:layout_constraintTop_toBottomOf="@id/ivProfilePhoto"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="10dp"/>
+
+    <LinearLayout
+        android:id="@+id/layoutEdit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvFullName"
+        android:gravity="center"
+        android:padding="5dp"
+        android:layout_marginTop="10dp">
+
+        <TextView
+            android:id="@+id/tvUpdatePhoto"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Update Photo"
+            android:textColor="#5A5A5A"
+            android:fontFamily="@font/poppins"
+            android:drawableStart="@drawable/outline_upload_24"
+            android:drawablePadding="5dp"
+            app:layout_constraintTop_toBottomOf="@id/tvFullName"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginEnd="10dp"
+            />
+
+        <TextView
+            android:id="@+id/tvResetPhoto"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Reset Photo"
+            android:fontFamily="@font/poppins"
+            android:drawablePadding="5dp"
+            android:drawableStart="@drawable/outline_delete_24"
+            app:layout_constraintStart_toEndOf="@id/tvUpdatePhoto"
+            app:layout_constraintTop_toBottomOf="@id/tvFullName"/>
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/tvAccountInformation"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="ACCOUNT INFORMATION"
+        android:textSize="15sp"
+        android:fontFamily="@font/poppins_medium"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
+        app:layout_constraintTop_toBottomOf="@id/layoutEdit"
+        app:layout_constraintStart_toStartOf="parent"/>
+
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/cvInformation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardBackgroundColor="@color/white"
+        app:cardElevation="4dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvAccountInformation"
+        android:layout_marginTop="10dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_margin="20dp">
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:endIconMode="custom"
+                app:endIconDrawable="@drawable/outline_edit_24"
+                android:hint="FULL NAME"
+                app:boxBackgroundMode="outline"
+                app:boxStrokeColor="@color/bagcilar_dark_blue">
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="text"/>
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:endIconMode="custom"
+                app:endIconDrawable="@drawable/outline_lock_24"
+                android:hint="EMAIL"
+                app:boxBackgroundMode="outline"
+                app:boxStrokeColor="@color/bagcilar_dark_blue"
+                android:layout_marginTop="10dp">
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textEmailAddress"
+                    android:focusable="false"
+                    android:cursorVisible="false"
+                    android:longClickable="false"/>
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:endIconMode="custom"
+                android:hint="PHONE NUMBER"
+                app:boxBackgroundMode="outline"
+                app:endIconDrawable="@drawable/outline_edit_24"
+                app:boxStrokeColor="@color/bagcilar_dark_blue"
+                android:layout_marginTop="10dp">
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="phone"/>
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:endIconMode="custom"
+                app:startIconDrawable="@drawable/outline_security_24"
+                app:endIconDrawable="@drawable/outline_chevron_forward_24"
+                android:hint="SECURITY"
+                app:boxBackgroundMode="outline"
+                app:boxStrokeColor="@color/bagcilar_dark_blue"
+                android:layout_marginTop="10dp">
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="phone"
+                    android:text="Change Password"
+                    android:focusable="false"
+                    android:longClickable="false"
+                    android:cursorVisible="false"/>
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.divider.MaterialDivider
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="10dp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Your personal information is used to manage your account and identify your reports."
+                android:fontFamily="@font/poppins_semibold"
+                android:textAlignment="center"
+                android:textSize="12sp"
+                android:layout_marginTop="10dp"/>
+        </LinearLayout>
+
+    </com.google.android.material.card.MaterialCardView>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnSave"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Save Changes"
+        android:fontFamily="@font/poppins_semibold"
+        android:textSize="20sp"
+        android:backgroundTint="@color/bagcilar_dark_blue"
+        app:strokeColor="@color/white"
+        android:elevation="4dp"
+        app:icon="@drawable/outline_save_24"
+        app:iconSize="20sp"
+        app:iconGravity="textStart"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginTop="10dp"
+        app:layout_constraintTop_toBottomOf="@id/cvInformation"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

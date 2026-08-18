@@ -51,6 +51,12 @@
         <action
             android:id="@+id/action_homeFragment_to_myReportsFragment"
             app:destination="@id/myReportsFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_smartAssistantFragment"
+            app:destination="@id/smartAssistantFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_announcementsFragment"
+            app:destination="@id/announcementsFragment" />
     </fragment>
     <fragment
         android:id="@+id/myReportsFragment"
@@ -81,6 +87,15 @@
         <action
             android:id="@+id/action_profileFragment_to_myReportsFragment"
             app:destination="@id/myReportsFragment" />
+        <action
+            android:id="@+id/action_profileFragment_to_helpAndSupportFragment"
+            app:destination="@id/helpAndSupportFragment" />
+        <action
+            android:id="@+id/action_profileFragment_to_aboutFragment"
+            app:destination="@id/aboutFragment" />
+        <action
+            android:id="@+id/action_profileFragment_to_personalInformationFragment"
+            app:destination="@id/personalInformationFragment" />
     </fragment>
     <fragment
         android:id="@+id/reportFragment"
@@ -169,5 +184,38 @@
         android:name="com.samedtevin.bagcilarapp.ui.main.detail.ReportReviewFragment"
         android:label="fragment_report_review"
         tools:layout="@layout/fragment_report_review" />
+    <fragment
+        android:id="@+id/smartAssistantFragment"
+        android:name="com.samedtevin.bagcilarapp.ui.main.detail.SmartAssistantFragment"
+        android:label="fragment_smart_assistant"
+        tools:layout="@layout/fragment_smart_assistant" />
+    <fragment
+        android:id="@+id/announcementsFragment"
+        android:name="com.samedtevin.bagcilarapp.ui.main.detail.AnnouncementsFragment"
+        android:label="AnnouncementsFragment" >
+        <action
+            android:id="@+id/action_announcementsFragment_to_announcementDetailFragment"
+            app:destination="@id/announcementDetailFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/announcementDetailFragment"
+        android:name="com.samedtevin.bagcilarapp.ui.main.detail.AnnouncementDetailFragment"
+        android:label="fragment_announcement_detail"
+        tools:layout="@layout/fragment_announcement_detail" />
+    <fragment
+        android:id="@+id/helpAndSupportFragment"
+        android:name="com.samedtevin.bagcilarapp.ui.main.detail.HelpAndSupportFragment"
+        android:label="fragment_help_and_support"
+        tools:layout="@layout/fragment_help_and_support" />
+    <fragment
+        android:id="@+id/aboutFragment"
+        android:name="com.samedtevin.bagcilarapp.ui.main.detail.AboutFragment"
+        android:label="fragment_about"
+        tools:layout="@layout/fragment_about" />
+    <fragment
+        android:id="@+id/personalInformationFragment"
+        android:name="com.samedtevin.bagcilarapp.ui.main.detail.PersonalInformationFragment"
+        android:label="fragment_personal_information"
+        tools:layout="@layout/fragment_personal_information" />
 
 </navigation>

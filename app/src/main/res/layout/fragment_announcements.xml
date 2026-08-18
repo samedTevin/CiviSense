@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".ui.main.detail.SmartAssistantFragment"
+    android:background="@color/white"
+    >
+
+    <Toolbar
+        android:id="@+id/toolBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:gravity="center_vertical"
+        android:layout_marginTop="15dp"
+        >
+        <ImageButton
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:src="@drawable/outline_arrow_left_alt_24"
+            android:layout_gravity="center|start"
+            android:scaleType="centerCrop"
+            android:backgroundTint="@color/white" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Announcements"
+            android:textSize="25sp"
+            android:fontFamily="@font/poppins_semibold"
+            android:textColor="@color/bagcilar_dark_blue"
+            android:layout_gravity="center_horizontal" />
+    </Toolbar>
+
+    <SearchView
+        android:id="@+id/searchView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:queryHint="Search announcements..."
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/toolBar"
+        android:inputType="text"
+        android:iconifiedByDefault="false"
+        android:focusable="false"
+        android:background="@drawable/bg_search"
+        android:layout_margin="20dp"
+        android:searchHintIcon="@null"
+        android:elevation="4dp"/>
+
+    <TextView
+        android:id="@+id/tvLatest"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="LATEST"
+        android:textSize="15sp"
+        android:fontFamily="@font/poppins_medium"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
+        app:layout_constraintTop_toBottomOf="@id/searchView"
+        app:layout_constraintStart_toStartOf="parent"/>
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/cvLatest"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:elevation="4dp"
+        android:backgroundTint="@color/white"
+        app:layout_constraintTop_toBottomOf="@id/tvLatest"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="10dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp">
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/ivLatestAnnouncement"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:src="@drawable/bagcilar"
+                android:scaleType="centerCrop"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_gravity="center_horizontal">
+                <TextView
+                    android:id="@+id/tvLatestAnnouncementTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Title"
+                    android:textSize="20sp"
+                    android:fontFamily="@font/poppins_semibold"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginStart="10dp"/>
+
+                <View
+                    android:layout_width="280dp"
+                    android:layout_height="match_parent"/>
+
+                <ImageView
+                    android:layout_width="30dp"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/outline_chevron_forward_24"
+                    app:tint="#D9D9D9" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/tvLatestAnnouncementDate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="16 Aug 2016"
+                android:textSize="16sp"
+                android:fontFamily="@font/poppins"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="10dp"/>
+
+        </LinearLayout>
+
+    </com.google.android.material.card.MaterialCardView>
+
+    <TextView
+        android:id="@+id/tvMoreUpdates"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="MORE UPDATES"
+        android:textSize="15sp"
+        android:fontFamily="@font/poppins_medium"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
+        app:layout_constraintTop_toBottomOf="@id/cvLatest"
+        app:layout_constraintStart_toStartOf="parent"/>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvAnnouncements"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        tools:listitem="@layout/item_announcement"
+        app:layout_constraintTop_toBottomOf="@id/tvMoreUpdates"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

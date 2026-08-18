@@ -100,7 +100,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:gravity="center">
+                android:gravity="center_horizontal">
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -110,12 +110,14 @@
                     android:fontFamily="@font/poppins_medium"
                     android:layout_marginTop="20dp"/>
                 <com.google.android.material.button.MaterialButton
-                    android:layout_width="300dp"
+                    android:id="@+id/btnReportIssue"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Report an Issue"
                     android:textSize="16sp"
                     android:fontFamily="@font/poppins_medium"
                     app:iconSize="25sp"
+                    android:gravity="center_horizontal"
                     android:textColor="@color/black"
                     app:cornerRadius="10dp"
                     app:icon="@drawable/outline_add_24"
@@ -123,6 +125,8 @@
                     app:iconTint="@color/bagcilar_dark_blue"
                     android:backgroundTint="@color/white"
                     android:layout_marginBottom="10dp"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginEnd="20dp"
                     />
             </LinearLayout>
 
@@ -154,7 +158,9 @@
                 android:id="@+id/cardMyReports"
                 android:layout_width="150dp"
                 android:layout_height="wrap_content"
-                android:layout_margin="20dp">
+                android:layout_margin="20dp"
+                android:elevation="4dp"
+                android:backgroundTint="#D3E0FA">
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -194,7 +200,9 @@
                 android:id="@+id/cardAskGemini"
                 android:layout_width="150dp"
                 android:layout_height="wrap_content"
-                android:layout_margin="20dp">
+                android:layout_margin="20dp"
+                android:elevation="4dp"
+                android:backgroundTint="@color/white">
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -249,6 +257,8 @@
             app:layout_constraintTop_toBottomOf="@id/tvMyActivity"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            android:backgroundTint="@color/white"
+            android:elevation="4dp"
             app:cardCornerRadius="18dp"
             android:layout_margin="20dp">
             <LinearLayout
@@ -352,6 +362,8 @@
             app:layout_constraintTop_toBottomOf="@id/tvRecentReport"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            android:backgroundTint="@color/white"
+            android:elevation="4dp"
             app:cardCornerRadius="18dp"
             android:layout_margin="20dp">
             <LinearLayout

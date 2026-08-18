@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="150dp"
+    android:background="@color/bagcilar_dark_blue"
+    android:gravity="bottom"
+    android:padding="16dp">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical">
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/ivProfilePhoto"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:src="@drawable/bagcilar"
+            android:scaleType="centerCrop"
+            app:shapeAppearance="@style/CircleImageView"
+            app:strokeColor="@color/white"
+            app:strokeWidth="2dp"
+            android:padding="5dp"/>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginStart="10dp">
+            <TextView
+                android:id="@+id/tvFullName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Samed Tevin"
+                android:textColor="@color/white"
+                android:fontFamily="@font/poppins_semibold"
+                android:textSize="18sp"/>
+            <TextView
+                android:id="@+id/tvEmail"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="samed@gmail.com"
+                android:textColor="@color/white"
+                android:fontFamily="@font/poppins"
+                android:textSize="14sp"/>
+        </LinearLayout>
+    </LinearLayout>
+
+</LinearLayout>
