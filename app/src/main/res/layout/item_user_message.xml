@@ -17,11 +17,12 @@
     <com.google.android.material.card.MaterialCardView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:backgroundTint="@color/bagcilar_dark_blue"
+        app:cardBackgroundColor="@color/bagcilar_dark_blue"
         app:cardCornerRadius="18dp"
-        android:elevation="4dp"
+        app:cardElevation="4dp"
         >
-        <TextView
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/tvUserMessage"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Ankara"
@@ -29,6 +30,7 @@
             android:fontFamily="@font/poppins"
             android:textColor="@color/white"
             android:layout_margin="10dp"
-            android:layout_gravity="center_vertical"/>
+            android:layout_gravity="center_vertical"
+            android:textIsSelectable="true"/>
     </com.google.android.material.card.MaterialCardView>
 </LinearLayout>

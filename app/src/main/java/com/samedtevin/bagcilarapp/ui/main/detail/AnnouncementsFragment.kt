@@ -56,8 +56,9 @@ class AnnouncementsFragment : Fragment() {
         collectLatestAnnouncement()
         collectAnnouncements()
 
-        announcementAdapter.onItemClick = { announcement ->
-            findNavController().navigate(R.id.action_announcementsFragment_to_announcementDetailFragment)
+        announcementAdapter.onItemClick = { announcementId ->
+            val action = AnnouncementsFragmentDirections.actionAnnouncementsFragmentToAnnouncementDetailFragment(announcementId)
+            findNavController().navigate(action)
         }
     }
 
@@ -82,6 +83,10 @@ class AnnouncementsFragment : Fragment() {
                         binding.tvLatestAnnouncementTitle.text = announcement.title
                         binding.tvLatestAnnouncementDate.text = announcement.createdAt?.toDate().let{
                             SimpleDateFormat("dd MMM yyyy", Locale.getDefault()).format(it)
+                        }
+                        binding.cvLatest.setOnClickListener {
+                            val action = AnnouncementsFragmentDirections.actionAnnouncementsFragmentToAnnouncementDetailFragment(announcement.id)
+                            findNavController().navigate(action)
                         }
                     }
 

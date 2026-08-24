@@ -57,6 +57,9 @@
         <action
             android:id="@+id/action_homeFragment_to_announcementsFragment"
             app:destination="@id/announcementsFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_announcementDetailFragment"
+            app:destination="@id/announcementDetailFragment" />
     </fragment>
     <fragment
         android:id="@+id/myReportsFragment"
@@ -201,12 +204,20 @@
         android:id="@+id/announcementDetailFragment"
         android:name="com.samedtevin.bagcilarapp.ui.main.detail.AnnouncementDetailFragment"
         android:label="fragment_announcement_detail"
-        tools:layout="@layout/fragment_announcement_detail" />
+        tools:layout="@layout/fragment_announcement_detail" >
+        <argument
+            android:name="announcementId"
+            app:argType="string" />
+    </fragment>
     <fragment
         android:id="@+id/helpAndSupportFragment"
         android:name="com.samedtevin.bagcilarapp.ui.main.detail.HelpAndSupportFragment"
         android:label="fragment_help_and_support"
-        tools:layout="@layout/fragment_help_and_support" />
+        tools:layout="@layout/fragment_help_and_support" >
+        <action
+            android:id="@+id/action_helpAndSupportFragment_to_smartAssistantFragment"
+            app:destination="@id/smartAssistantFragment" />
+    </fragment>
     <fragment
         android:id="@+id/aboutFragment"
         android:name="com.samedtevin.bagcilarapp.ui.main.detail.AboutFragment"

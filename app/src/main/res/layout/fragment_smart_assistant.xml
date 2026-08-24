@@ -34,6 +34,16 @@
             android:fontFamily="@font/poppins_semibold"
             android:textColor="@color/bagcilar_dark_blue"
             android:layout_gravity="center_horizontal" />
+
+        <ImageButton
+            android:id="@+id/btnDelete"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:src="@drawable/outline_delete_24"
+            android:layout_gravity="center|end"
+            android:scaleType="centerCrop"
+            android:backgroundTint="@color/white"
+            android:layout_marginEnd="10dp"/>
     </Toolbar>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -44,6 +54,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:visibility="visible"
+        android:background="@color/white"
         >
 
         <ImageView
@@ -104,21 +115,28 @@
             app:cardCornerRadius="6dp"
             android:layout_margin="20dp">
 
-            <TextView
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="How can I report a problem?"
-                android:fontFamily="@font/poppins"
-                android:textSize="16sp"
-                android:layout_margin="10dp"/>
+                android:orientation="horizontal"
+                android:gravity="center_vertical">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="How do I submit a report?"
+                    android:fontFamily="@font/poppins"
+                    android:textSize="16sp"
+                    android:layout_margin="10dp"
+                    android:layout_weight="1"/>
 
-            <ImageView
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:src="@drawable/outline_chevron_forward_24"
-                android:layout_gravity="end"
-                app:tint="@color/bagcilar_dark_blue"
-                android:layout_margin="10dp"/>
+                <ImageView
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:src="@drawable/outline_chevron_forward_24"
+                    app:tint="@color/bagcilar_dark_blue"
+                    android:layout_margin="10dp"/>
+            </LinearLayout>
+
 
         </com.google.android.material.card.MaterialCardView>
 
@@ -133,21 +151,27 @@
             app:cardCornerRadius="6dp"
             android:layout_margin="20dp">
 
-            <TextView
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="What services are available?"
-                android:fontFamily="@font/poppins"
-                android:textSize="16sp"
-                android:layout_margin="10dp"/>
+                android:orientation="horizontal"
+                android:gravity="center_vertical">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="How can I track my reports?"
+                    android:fontFamily="@font/poppins"
+                    android:textSize="16sp"
+                    android:layout_margin="10dp"
+                    android:layout_weight="1"/>
 
-            <ImageView
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:src="@drawable/outline_chevron_forward_24"
-                android:layout_gravity="end"
-                app:tint="@color/bagcilar_dark_blue"
-                android:layout_margin="10dp"/>
+                <ImageView
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:src="@drawable/outline_chevron_forward_24"
+                    app:tint="@color/bagcilar_dark_blue"
+                    android:layout_margin="10dp"/>
+            </LinearLayout>
 
         </com.google.android.material.card.MaterialCardView>
 
@@ -162,21 +186,27 @@
             app:cardCornerRadius="6dp"
             android:layout_margin="20dp">
 
-            <TextView
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Where can I get help?"
-                android:fontFamily="@font/poppins"
-                android:textSize="16sp"
-                android:layout_margin="10dp"/>
+                android:orientation="horizontal"
+                android:gravity="center_vertical">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Is an account required to report?"
+                    android:fontFamily="@font/poppins"
+                    android:textSize="16sp"
+                    android:layout_margin="10dp"
+                    android:layout_weight="1"/>
 
-            <ImageView
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:src="@drawable/outline_chevron_forward_24"
-                android:layout_gravity="end"
-                app:tint="@color/bagcilar_dark_blue"
-                android:layout_margin="10dp"/>
+                <ImageView
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:src="@drawable/outline_chevron_forward_24"
+                    app:tint="@color/bagcilar_dark_blue"
+                    android:layout_margin="10dp"/>
+            </LinearLayout>
 
         </com.google.android.material.card.MaterialCardView>
     </androidx.constraintlayout.widget.ConstraintLayout>
@@ -185,12 +215,47 @@
         android:id="@+id/rvAiChat"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:background="@color/white"
         app:layout_constraintTop_toBottomOf="@id/toolBar"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/textInputLayout"
+        app:layout_constraintBottom_toTopOf="@id/errorLayout"
         app:layout_constraintStart_toStartOf="parent"
         tools:listitem="@layout/item_user_message"
         android:visibility="gone"/>
+
+    <LinearLayout
+        android:id="@+id/errorLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:padding="12dp"
+        android:visibility="gone"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/textInputLayout">
+
+        <TextView
+            android:id="@+id/tvError"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Something went wrong."
+            android:textSize="13sp"
+            android:textColor="@color/black"
+            android:fontFamily="@font/poppins"
+            android:gravity="center"
+            android:layout_marginBottom="6dp" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnRetry"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Try Again"
+            android:backgroundTint="@color/bagcilar_dark_blue"
+            android:textAllCaps="false"
+            android:fontFamily="@font/poppins_medium" />
+
+    </LinearLayout>
 
 
 
@@ -217,14 +282,16 @@
         >
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/etAiQuestion"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:inputType="text"
+            android:imeOptions="actionSend"
             android:textColor="@color/black"
             android:layout_marginStart="20dp"
             android:layout_marginEnd="20dp"
             android:layout_marginBottom="5dp"
-            android:layout_marginTop="10dp"/>
+            android:layout_marginTop="10dp" />
 
         <TextView
             android:layout_width="wrap_content"

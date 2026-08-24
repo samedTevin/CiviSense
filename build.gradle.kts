@@ -5,4 +5,5 @@ plugins {
     alias(libs.plugins.google.gms.google.services) apply false
     alias(libs.plugins.hilt.android) apply false
     alias(libs.plugins.ksp) apply false
+    id("androidx.navigation.safeargs.kotlin") version "2.9.8" apply false
 }

@@ -3,6 +3,9 @@ plugins {
     alias(libs.plugins.hilt.android)
     alias(libs.plugins.ksp)
     alias(libs.plugins.google.gms.google.services)
+    id("androidx.navigation.safeargs.kotlin")
+    kotlin("plugin.serialization") version "2.3.20"
+
 }
 
 android {
@@ -40,16 +43,24 @@ android {
 }
 
 dependencies {
+
     implementation(libs.androidx.activity.ktx)
     implementation(libs.androidx.appcompat)
     implementation(libs.androidx.constraintlayout)
     implementation(libs.androidx.core.ktx)
+    implementation(libs.firebase.ai)
     implementation(libs.firebase.auth)
     implementation(libs.firebase.firestore)
     implementation(libs.material)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.espresso.core)
     androidTestImplementation(libs.androidx.junit)
+
+    // Firebase BoM
+    implementation(platform("com.google.firebase:firebase-bom:34.17.0"))
+
+    // Firebase App Check - local development
+    implementation("com.google.firebase:firebase-appcheck-debug")
 
     // Navigation &  Views/Fragments Integration
     val nav_version = "2.9.8"
@@ -62,6 +73,7 @@ dependencies {
 
     // DataStore
     implementation ("androidx.datastore:datastore-preferences:1.1.6")
+    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.9.0")
 
     // Coroutines
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.7.1")
@@ -75,4 +87,7 @@ dependencies {
 
     // Glide
     implementation("com.github.bumptech.glide:glide:5.0.5")
+
+    implementation("io.noties.markwon:core:4.6.2")
+
 }

@@ -17,6 +17,8 @@ class AnnouncementViewModel @Inject constructor(private val announcementReposito
 
     private var _latest = MutableStateFlow<Announcement?>(null)
     val latest get() = _latest.asStateFlow()
+    private var _selected = MutableStateFlow<Announcement?>(null)
+    val selected get() = _selected.asStateFlow()
 
     fun getAnnouncements(){
         viewModelScope.launch {
@@ -27,6 +29,12 @@ class AnnouncementViewModel @Inject constructor(private val announcementReposito
     fun getLatestAnnouncement(){
         viewModelScope.launch {
             _latest.value = announcementRepository.getLatestAnnouncement()
+        }
+    }
+
+    fun getSelectedAnnouncement(announcementId: String){
+        viewModelScope.launch {
+            _selected.value = announcementRepository.getSelectedAnnouncement(announcementId)
         }
     }
 }

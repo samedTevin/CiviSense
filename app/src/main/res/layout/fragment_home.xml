@@ -92,6 +92,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:cardCornerRadius="18dp"
+            app:cardElevation="4dp"
             android:layout_marginTop="20dp"
             android:layout_marginStart="20dp"
             android:layout_marginEnd="20dp"
@@ -122,6 +123,7 @@
                     app:cornerRadius="10dp"
                     app:icon="@drawable/outline_add_24"
                     app:iconGravity="textStart"
+                    android:elevation="4dp"
                     app:iconTint="@color/bagcilar_dark_blue"
                     android:backgroundTint="@color/white"
                     android:layout_marginBottom="10dp"
@@ -159,7 +161,7 @@
                 android:layout_width="150dp"
                 android:layout_height="wrap_content"
                 android:layout_margin="20dp"
-                android:elevation="4dp"
+                app:cardElevation="4dp"
                 android:backgroundTint="#D3E0FA">
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -201,7 +203,7 @@
                 android:layout_width="150dp"
                 android:layout_height="wrap_content"
                 android:layout_margin="20dp"
-                android:elevation="4dp"
+                app:cardElevation="4dp"
                 android:backgroundTint="@color/white">
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -258,7 +260,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             android:backgroundTint="@color/white"
-            android:elevation="4dp"
+            app:cardElevation="4dp"
             app:cardCornerRadius="18dp"
             android:layout_margin="20dp">
             <LinearLayout
@@ -363,7 +365,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             android:backgroundTint="@color/white"
-            android:elevation="4dp"
+            app:cardElevation="4dp"
             app:cardCornerRadius="18dp"
             android:layout_margin="20dp">
             <LinearLayout
@@ -424,7 +426,7 @@
             android:id="@+id/tvLatestAnnouncements"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="LATEST ANNOUNCEMENTS"
+            android:text="RANDOM ANNOUNCEMENTS"
             android:textSize="15sp"
             android:fontFamily="@font/poppins_medium"
             android:layout_marginStart="20dp"
@@ -446,13 +448,14 @@
             android:layout_marginTop="20dp"/>
 
         <com.google.android.material.card.MaterialCardView
-            android:id="@+id/cvLatestAnnouncements"
+            android:id="@+id/cvRandomAnnouncement"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             app:layout_constraintTop_toBottomOf="@id/tvLatestAnnouncements"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
+            app:cardBackgroundColor="@color/white"
+            app:cardElevation="4dp"
             app:cardCornerRadius="18dp"
             android:layout_margin="20dp">
 
@@ -509,6 +512,17 @@
 
             </androidx.constraintlayout.widget.ConstraintLayout>
         </com.google.android.material.card.MaterialCardView>
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:src="@drawable/ic_squre"
+            android:scaleType="centerCrop"
+            app:layout_constraintTop_toBottomOf="@id/cvRandomAnnouncement"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="20dp"/>
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 

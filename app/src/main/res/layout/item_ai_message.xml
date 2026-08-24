@@ -16,16 +16,18 @@
     <com.google.android.material.card.MaterialCardView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@color/bagcilar_dark_blue"
+        app:cardBackgroundColor="@color/white"
         app:cardCornerRadius="18dp"
-        android:elevation="4dp">
-        <TextView
+        app:cardElevation="4dp">
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/tvAiMessage"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Ankara"
             android:textSize="14sp"
             android:fontFamily="@font/poppins"
             android:layout_margin="10dp"
-            android:layout_gravity="center_vertical"/>
+            android:layout_gravity="center_vertical"
+            android:textIsSelectable="true"/>
     </com.google.android.material.card.MaterialCardView>
 </LinearLayout>

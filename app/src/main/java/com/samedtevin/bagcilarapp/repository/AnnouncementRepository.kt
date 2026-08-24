@@ -32,4 +32,11 @@ class AnnouncementRepository @Inject constructor(private val firestore: Firebase
 
         return announcement[0]
     }
+
+    suspend fun getSelectedAnnouncement(announcementId: String): Announcement?{
+        val selectedAnnouncement = firestore.collection("announcements").document(announcementId).get().await().toObject(
+            Announcement::class.java)?.copy(id = announcementId)
+
+        return selectedAnnouncement
+    }
 }

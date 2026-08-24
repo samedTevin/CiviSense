@@ -97,6 +97,10 @@ class HomeFragment : Fragment() {
                             }
                             Glide.with(requireContext()).load(random.imageUrl).into(ivAnnouncement)
 
+                            cvRandomAnnouncement.setOnClickListener {
+                                val action = HomeFragmentDirections.actionHomeFragmentToAnnouncementDetailFragment(random.id)
+                                findNavController().navigate(action)
+                            }
                         }
                     }
                 }
