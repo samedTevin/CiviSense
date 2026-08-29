@@ -63,48 +63,55 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
-                <RadioButton
+                <RadioGroup
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Light"
-                    android:gravity="center_vertical|end"
-                    android:textDirection="rtl"
-                    android:layoutDirection="rtl"
-                    android:padding="10dp"
-                    android:drawableEnd="@drawable/outline_light_mode_24"
-                    android:drawablePadding="12dp" />
+                    android:layout_height="wrap_content">
+                    <RadioButton
+                        android:id="@+id/rbLight"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Light"
+                        android:gravity="center_vertical|end"
+                        android:textDirection="rtl"
+                        android:layoutDirection="rtl"
+                        android:padding="10dp"
+                        android:drawableEnd="@drawable/outline_light_mode_24"
+                        android:drawablePadding="12dp" />
 
-                <com.google.android.material.divider.MaterialDivider
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
+                    <com.google.android.material.divider.MaterialDivider
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
 
-                <RadioButton
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Dark"
-                    android:gravity="center_vertical|end"
-                    android:textDirection="rtl"
-                    android:layoutDirection="rtl"
-                    android:padding="10dp"
-                    android:drawableEnd="@drawable/outline_dark_mode_24"
-                    android:drawableTint="@color/black"
-                    android:drawablePadding="12dp"
-                    />
-                <com.google.android.material.divider.MaterialDivider
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
+                    <RadioButton
+                        android:id="@+id/rbDark"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Dark"
+                        android:gravity="center_vertical|end"
+                        android:textDirection="rtl"
+                        android:layoutDirection="rtl"
+                        android:padding="10dp"
+                        android:drawableEnd="@drawable/outline_dark_mode_24"
+                        android:drawableTint="@color/black"
+                        android:drawablePadding="12dp"
+                        />
+                    <com.google.android.material.divider.MaterialDivider
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
 
-                <RadioButton
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="System Default"
-                    android:gravity="center_vertical|end"
-                    android:textDirection="rtl"
-                    android:layoutDirection="rtl"
-                    android:padding="10dp"
-                    android:drawableEnd="@drawable/outline_settings_brightness_24"
-                    android:drawablePadding="12dp"
-                    />
+                    <RadioButton
+                        android:id="@+id/rbDefault"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="System Default"
+                        android:gravity="center_vertical|end"
+                        android:textDirection="rtl"
+                        android:layoutDirection="rtl"
+                        android:padding="10dp"
+                        android:drawableEnd="@drawable/outline_settings_brightness_24"
+                        android:drawablePadding="12dp"
+                        />
+                </RadioGroup>
             </LinearLayout>
         </com.google.android.material.card.MaterialCardView>
     </androidx.constraintlayout.widget.ConstraintLayout>

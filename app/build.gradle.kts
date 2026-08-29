@@ -1,3 +1,6 @@
+import org.jetbrains.kotlin.konan.properties.Properties
+import java.io.FileInputStream
+
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.hilt.android)
@@ -6,6 +9,13 @@ plugins {
     id("androidx.navigation.safeargs.kotlin")
     kotlin("plugin.serialization") version "2.3.20"
 
+}
+
+val secretsFile = rootProject.file("secrets.properties")
+val secretsProperties = Properties().apply {
+    if (secretsFile.exists()) {
+        load(FileInputStream(secretsFile))
+    }
 }
 
 android {
@@ -22,6 +32,9 @@ android {
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+
+        manifestPlaceholders["GOOGLE_MAPS_API_KEY"] = secretsProperties.getProperty("GOOGLE_MAPS_API_KEY", "")
+
     }
 
     buildTypes {
@@ -89,5 +102,7 @@ dependencies {
     implementation("com.github.bumptech.glide:glide:5.0.5")
 
     implementation("io.noties.markwon:core:4.6.2")
+
+    implementation(libs.play.services.maps)
 
 }

@@ -5,6 +5,7 @@ build/
 
 # Local config
 local.properties
+secret.properties
 
 # IDE
 .idea/

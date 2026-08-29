@@ -117,6 +117,9 @@
         <action
             android:id="@+id/action_reportFragment_to_reportReviewFragment"
             app:destination="@id/reportReviewFragment" />
+        <action
+            android:id="@+id/action_reportFragment_to_locationFragment"
+            app:destination="@id/locationFragment" />
     </fragment>
     <fragment
         android:id="@+id/registerFragment"
@@ -228,5 +231,10 @@
         android:name="com.samedtevin.bagcilarapp.ui.main.detail.PersonalInformationFragment"
         android:label="fragment_personal_information"
         tools:layout="@layout/fragment_personal_information" />
+    <fragment
+        android:id="@+id/locationFragment"
+        android:name="com.samedtevin.bagcilarapp.ui.main.detail.LocationFragment"
+        android:label="fragment_location"
+        tools:layout="@layout/fragment_location" />
 
 </navigation>
