@@ -1,11 +1,21 @@
 package com.samedtevin.bagcilarapp.ui.main.detail
 
+import android.Manifest
+import android.content.pm.PackageManager
+import android.location.Geocoder
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.SearchView
 import android.widget.Toast
+import androidx.activity.result.contract.ActivityResultContracts
+import androidx.core.app.ActivityCompat
+import androidx.fragment.app.Fragment
+import androidx.lifecycle.lifecycleScope
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.android.gms.location.FusedLocationProviderClient
+import com.google.android.gms.location.LocationServices
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
@@ -13,160 +23,629 @@ import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
-import com.samedtevin.bagcilarapp.R
-import com.samedtevin.bagcilarapp.databinding.FragmentLocationBinding
-import org.json.JSONObject
 import com.google.android.gms.maps.model.Polygon
 import com.google.android.gms.maps.model.PolygonOptions
-
+import com.google.android.libraries.places.api.Places
+import com.google.android.libraries.places.api.model.AutocompletePrediction
+import com.google.android.libraries.places.api.model.AutocompleteSessionToken
+import com.google.android.libraries.places.api.model.Place
+import com.google.android.libraries.places.api.model.RectangularBounds
+import com.google.android.libraries.places.api.net.FetchPlaceRequest
+import com.google.android.libraries.places.api.net.FindAutocompletePredictionsRequest
+import com.google.android.libraries.places.api.net.PlacesClient
+import com.samedtevin.bagcilarapp.BuildConfig
+import com.samedtevin.bagcilarapp.R
+import com.samedtevin.bagcilarapp.adapter.uiadapters.LocationSearchAdapter
+import com.samedtevin.bagcilarapp.databinding.FragmentLocationBinding
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
+import org.json.JSONObject
+import java.util.Locale
 
 class LocationFragment : Fragment(), OnMapReadyCallback {
 
     private var _binding: FragmentLocationBinding? = null
-    val binding get() = _binding!!
+    private val binding get() = _binding!!
 
     private lateinit var myMap: GoogleMap
+
     private var selectedMarker: Marker? = null
     private var bagcilarPolygon: Polygon? = null
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
+    private lateinit var fusedLocationClient: FusedLocationProviderClient
+    private lateinit var placesClient: PlacesClient
+    private lateinit var autoCompleteToken: AutocompleteSessionToken
+    private lateinit var locationSearchAdapter: LocationSearchAdapter
 
+    private var searchJob: Job? = null
+
+    private var isSelectingPlace = false
+
+    private val locationPermissionLauncher =
+        registerForActivityResult(
+            ActivityResultContracts.RequestMultiplePermissions()
+        ) { permission ->
+
+            val fineLocationGranted =
+                permission[Manifest.permission.ACCESS_FINE_LOCATION] == true
+
+            val coarseLocationGranted =
+                permission[Manifest.permission.ACCESS_COARSE_LOCATION] == true
+
+            if (fineLocationGranted || coarseLocationGranted) {
+                getCurrentLocation()
+            } else {
+                Toast.makeText(
+                    requireContext(),
+                    "Need location permission.",
+                    Toast.LENGTH_SHORT
+                ).show()
+            }
+        }
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
+        inflater: LayoutInflater,
+        container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        _binding = FragmentLocationBinding.inflate(inflater,container,false)
+    ): View {
+
+        _binding = FragmentLocationBinding.inflate(
+            inflater,
+            container,
+            false
+        )
+
         return binding.root
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+    override fun onViewCreated(
+        view: View,
+        savedInstanceState: Bundle?
+    ) {
+
         super.onViewCreated(view, savedInstanceState)
 
-        val mapFragment = childFragmentManager.findFragmentById(R.id.map) as SupportMapFragment
+        initializePlaces()
+
+        locationSearchAdapter = LocationSearchAdapter { prediction ->
+            selectSearchResult(prediction)
+        }
+
+        binding.rvPlacesResult.apply {
+            layoutManager = LinearLayoutManager(requireContext())
+            adapter = locationSearchAdapter
+        }
+
+        val mapFragment =
+            childFragmentManager.findFragmentById(R.id.map)
+                    as SupportMapFragment
+
         mapFragment.getMapAsync(this)
+
+        fusedLocationClient =
+            LocationServices.getFusedLocationProviderClient(
+                requireContext()
+            )
+
+        binding.fabCurrentLocation.setOnClickListener {
+            getCurrentLocation()
+        }
+
+        setupSearchView()
     }
 
     override fun onMapReady(googleMap: GoogleMap) {
+
         myMap = googleMap
 
-        val bagcilar = LatLng(41.0390, 28.8567)
+        myMap.uiSettings.isZoomControlsEnabled = true
+
+        myMap.setMinZoomPreference(13f)
+        myMap.setMaxZoomPreference(20f)
+
+        val bagcilar = LatLng(
+            41.0390,
+            28.8567
+        )
 
         val bagcilarPoints = getBagcilarPoints()
 
-        bagcilarPolygon  = myMap.addPolygon(
-            PolygonOptions().addAll(bagcilarPoints).strokeWidth(4f).fillColor(0x22000000)
+        bagcilarPolygon = myMap.addPolygon(
+            PolygonOptions()
+                .addAll(bagcilarPoints)
+                .strokeWidth(4f)
+                .fillColor(0x22000000)
         )
 
         selectedMarker = myMap.addMarker(
-            MarkerOptions().position(bagcilar).title("Selected location").draggable(true)
+            MarkerOptions()
+                .position(bagcilar)
+                .title("Selected location")
+                .draggable(true)
         )
 
-        myMap.moveCamera(CameraUpdateFactory.newLatLngZoom(bagcilar, 15f))
+        myMap.moveCamera(
+            CameraUpdateFactory.newLatLngZoom(
+                bagcilar,
+                15f
+            )
+        )
 
         setupMarkerListeners()
     }
 
-    private fun setupMarkerListeners(){
-        myMap.setOnMapClickListener { latLng ->
-            moveMarker(latLng)
+    private fun initializePlaces() {
+
+        if (!Places.isInitialized()) {
+
+            Places.initializeWithNewPlacesApiEnabled(
+                requireContext(),
+                BuildConfig.GOOGLE_MAPS_API_KEY
+            )
         }
 
-        myMap.setOnMarkerDragListener(object : GoogleMap.OnMarkerDragListener {
-            override fun onMarkerDrag(p0: Marker) {
+        placesClient =
+            Places.createClient(requireContext())
+
+        autoCompleteToken =
+            AutocompleteSessionToken.newInstance()
+    }
+
+    private fun setupSearchView() {
+
+        binding.locationSearchView.setOnQueryTextListener(
+            object : SearchView.OnQueryTextListener {
+
+                override fun onQueryTextChange(newText: String?): Boolean {
+
+                    val query = newText?.trim().orEmpty()
+
+                    if (query.length < 2) {
+                        locationSearchAdapter.submitList(emptyList())
+                        binding.rvPlacesResult.visibility = View.GONE
+                        return true
+                    }
+
+                    searchPlaces(query)
+
+                    return true
+                }
+
+                override fun onQueryTextSubmit(query: String?): Boolean {
+
+                    val text = query?.trim().orEmpty()
+
+                    if (text.length >= 2) {
+                        searchPlaces(text)
+                    }
+
+                    return true
+                }
             }
+        )
+    }
 
-            override fun onMarkerDragEnd(p0: Marker) {
-                val latLng  = p0.position
+    private fun searchPlaces(query: String) {
 
-                val latitude = latLng.latitude
-                val longitude = latLng.longitude
+        val bagcilarBounds = RectangularBounds.newInstance(
+            LatLng(41.0150, 28.8100),
+            LatLng(41.0750, 28.9000)
+        )
+
+        val request =
+            FindAutocompletePredictionsRequest
+                .builder()
+                .setQuery(query)
+                .setCountries("TR")
+                .setLocationRestriction(bagcilarBounds)
+                .setSessionToken(autoCompleteToken)
+                .build()
+
+        placesClient
+            .findAutocompletePredictions(request)
+            .addOnSuccessListener { response ->
+
+                val results =
+                    response.autocompletePredictions
+
+                locationSearchAdapter.submitList(results)
+
+                binding.rvPlacesResult.visibility =
+                    if (results.isEmpty()) {
+                        View.GONE
+                    } else {
+                        View.VISIBLE
+                    }
             }
+            .addOnFailureListener { exception ->
 
-            override fun onMarkerDragStart(p0: Marker) {
+                locationSearchAdapter.submitList(emptyList())
+
+                binding.rvPlacesResult.visibility =
+                    View.GONE
+
                 Toast.makeText(
                     requireContext(),
-                    "DRAG BAŞLADI",
+                    "Search error: ${exception.message}",
+                    Toast.LENGTH_LONG
+                ).show()
+            }
+    }
+
+    private fun selectSearchResult(
+        prediction: AutocompletePrediction
+    ) {
+
+        isSelectingPlace = true
+
+        val request =
+            FetchPlaceRequest.builder(
+                prediction.placeId,
+                listOf(
+                    Place.Field.DISPLAY_NAME,
+                    Place.Field.FORMATTED_ADDRESS,
+                    Place.Field.LOCATION
+                )
+            ).build()
+
+        placesClient
+            .fetchPlace(request)
+            .addOnSuccessListener { response ->
+
+                if (!isAdded) return@addOnSuccessListener
+
+                val place = response.place
+
+                val location =
+                    place.location
+                        ?: return@addOnSuccessListener
+
+                if (!isPointInsidePolygon(location)) {
+
+                    Toast.makeText(
+                        requireContext(),
+                        "Please select a location inside Bağcılar.",
+                        Toast.LENGTH_SHORT
+                    ).show()
+
+                    isSelectingPlace = false
+                    return@addOnSuccessListener
+                }
+
+                selectedMarker?.position = location
+                selectedMarker?.tag = location
+
+                myMap.animateCamera(
+                    CameraUpdateFactory.newLatLngZoom(
+                        location,
+                        17f
+                    )
+                )
+
+                val placeName =
+                    place.displayName
+                        ?: "Selected Location"
+
+                val placeAddress =
+                    place.formattedAddress
+                        ?: "Bağcılar / İstanbul"
+
+                binding.tvAddress.text =
+                    placeName
+
+                binding.tvAddressDetail.text =
+                    placeAddress
+
+                binding.rvPlacesResult.visibility =
+                    View.GONE
+
+                binding.locationSearchView.setQuery(
+                    placeName,
+                    false
+                )
+
+                autoCompleteToken =
+                    AutocompleteSessionToken.newInstance()
+
+                binding.locationSearchView.clearFocus()
+
+                isSelectingPlace = false
+            }
+            .addOnFailureListener {
+
+                isSelectingPlace = false
+
+                Toast.makeText(
+                    requireContext(),
+                    "Could not get location details.",
                     Toast.LENGTH_SHORT
                 ).show()
             }
-        })
     }
 
-    private fun moveMarker(latLng: LatLng){
+    private fun updateSelectedLocation(
+        location: LatLng
+    ) {
 
-        if(isPointInsidePolygon(latLng)){
-            selectedMarker?.position = latLng
+        if (!isPointInsidePolygon(location)) {
+
+            Toast.makeText(
+                requireContext(),
+                "Please select a location inside Bağcılar.",
+                Toast.LENGTH_SHORT
+            ).show()
+
+            return
         }
-        else{
-            Toast.makeText(requireContext(),"Please select a location that contains Bagcilar.",Toast.LENGTH_SHORT).show()
+
+        selectedMarker?.position = location
+        selectedMarker?.tag = location
+
+        myMap.animateCamera(
+            CameraUpdateFactory.newLatLngZoom(
+                location,
+                17f
+            )
+        )
+
+        getAddressFromLocation(location)
+    }
+
+    private fun getAddressFromLocation(
+        location: LatLng
+    ) {
+
+        viewLifecycleOwner.lifecycleScope.launch {
+
+            val address = withContext(Dispatchers.IO) {
+
+                try {
+
+                    val geocoder =
+                        Geocoder(
+                            requireContext(),
+                            Locale("tr", "TR")
+                        )
+
+                    @Suppress("DEPRECATION")
+                    geocoder.getFromLocation(
+                        location.latitude,
+                        location.longitude,
+                        1
+                    )?.firstOrNull()
+
+                } catch (e: Exception) {
+
+                    null
+                }
+            }
+
+            if (!isAdded) return@launch
+
+            if (address != null) {
+
+                val streetName =
+                    address.thoroughfare
+                        ?: address.subLocality
+                        ?: address.locality
+                        ?: "Selected Location"
+
+                binding.tvAddress.text =
+                    streetName
+
+                binding.tvAddressDetail.text =
+                    address.getAddressLine(0)
+                        ?: "Bağcılar / İstanbul"
+
+            } else {
+
+                binding.tvAddress.text =
+                    "Selected Location"
+
+                binding.tvAddressDetail.text =
+                    "Bağcılar / İstanbul"
+            }
         }
     }
 
-    private fun isPointInsidePolygon(point: LatLng): Boolean{
+    private fun setupMarkerListeners() {
 
-        val polygon = getBagcilarPoints()
+        myMap.setOnMapClickListener { latLng ->
 
-        if(polygon.isEmpty()){
+            updateSelectedLocation(latLng)
+        }
+
+        myMap.setOnMarkerDragListener(
+            object : GoogleMap.OnMarkerDragListener {
+
+                override fun onMarkerDrag(
+                    marker: Marker
+                ) {
+                }
+
+                override fun onMarkerDragStart(
+                    marker: Marker
+                ) {
+                }
+
+                override fun onMarkerDragEnd(
+                    marker: Marker
+                ) {
+
+                    val newPosition =
+                        marker.position
+
+                    if (!isPointInsidePolygon(newPosition)) {
+
+                        marker.position =
+                            marker.tag as? LatLng
+                                ?: LatLng(
+                                    41.0390,
+                                    28.8567
+                                )
+
+                        Toast.makeText(
+                            requireContext(),
+                            "Please select a location inside Bağcılar.",
+                            Toast.LENGTH_SHORT
+                        ).show()
+
+                    } else {
+
+                        marker.tag =
+                            newPosition
+
+                        getAddressFromLocation(
+                            newPosition
+                        )
+                    }
+                }
+            }
+        )
+
+        selectedMarker?.tag =
+            selectedMarker?.position
+    }
+
+    private fun isPointInsidePolygon(
+        point: LatLng
+    ): Boolean {
+
+        val polygon =
+            getBagcilarPoints()
+
+        if (polygon.isEmpty()) {
             return false
         }
 
         var inside = false
-
         var j = polygon.lastIndex
 
-        for(i in polygon.indices){
+        for (i in polygon.indices) {
 
-            val current = polygon[i]
-            val previous = polygon[j]
+            val current =
+                polygon[i]
 
-            val intersects = ((current.latitude > point.latitude) !=
-                    (previous.latitude > point.latitude)) &&
-                    (point.longitude <
-                            (previous.longitude - current.longitude) *
-                            (point.latitude - current.latitude) /
-                            (previous.latitude - current.latitude) +
-                            current.longitude)
+            val previous =
+                polygon[j]
 
+            val intersects =
+                ((current.latitude > point.latitude) !=
+                        (previous.latitude > point.latitude)) &&
+                        (
+                                point.longitude <
+                                        (previous.longitude - current.longitude) *
+                                        (point.latitude - current.latitude) /
+                                        (previous.latitude - current.latitude) +
+                                        current.longitude
+                                )
 
-            if(intersects){
+            if (intersects) {
                 inside = !inside
             }
 
             j = i
-
         }
+
         return inside
     }
 
-    private fun loadBagcilarGeoJson(): JSONObject{
+    private fun getCurrentLocation() {
 
-        val inputStream = requireContext().assets.open("ilce_geojson.json")
+        if (
+            ActivityCompat.checkSelfPermission(
+                requireContext(),
+                Manifest.permission.ACCESS_FINE_LOCATION
+            ) != PackageManager.PERMISSION_GRANTED &&
+            ActivityCompat.checkSelfPermission(
+                requireContext(),
+                Manifest.permission.ACCESS_COARSE_LOCATION
+            ) != PackageManager.PERMISSION_GRANTED
+        ) {
 
-        val jsonString = inputStream.bufferedReader().use{ it.readText() }
+            locationPermissionLauncher.launch(
+                arrayOf(
+                    Manifest.permission.ACCESS_FINE_LOCATION,
+                    Manifest.permission.ACCESS_COARSE_LOCATION
+                )
+            )
+
+            return
+        }
+
+        fusedLocationClient
+            .lastLocation
+            .addOnSuccessListener { location ->
+
+                if (location != null) {
+
+                    val currentLocation =
+                        LatLng(
+                            location.latitude,
+                            location.longitude
+                        )
+
+                    updateSelectedLocation(
+                        currentLocation
+                    )
+
+                } else {
+
+                    Toast.makeText(
+                        requireContext(),
+                        "Current location could not be obtained.",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
+            }
+    }
+
+    private fun loadBagcilarGeoJson(): JSONObject {
+
+        val inputStream =
+            requireContext()
+                .assets
+                .open("ilce_geojson.json")
+
+        val jsonString =
+            inputStream
+                .bufferedReader()
+                .use { it.readText() }
 
         return JSONObject(jsonString)
     }
 
-    private fun getBagcilarFeature(): JSONObject?{
+    private fun getBagcilarFeature(): JSONObject? {
 
-        val geoJson = loadBagcilarGeoJson()
+        val geoJson =
+            loadBagcilarGeoJson()
 
-        val features = geoJson.getJSONArray("features")
+        val features =
+            geoJson.getJSONArray("features")
 
-        for(i in 0 until features.length()){
+        for (i in 0 until features.length()) {
 
-            val feature = features.getJSONObject(i)
+            val feature =
+                features.getJSONObject(i)
 
-            val properties = feature.getJSONObject("properties")
-            val address = properties.getJSONObject("address")
+            val properties =
+                feature.getJSONObject("properties")
 
-            val town = address.optString("town")
+            val address =
+                properties.getJSONObject("address")
 
-            if(town.equals("Bağcılar", ignoreCase = true)){
+            val town =
+                address.optString("town")
+
+            if (
+                town.equals(
+                    "Bağcılar",
+                    ignoreCase = true
+                )
+            ) {
                 return feature
             }
         }
@@ -174,27 +653,52 @@ class LocationFragment : Fragment(), OnMapReadyCallback {
         return null
     }
 
-    private fun getBagcilarPoints(): List<LatLng>{
+    private fun getBagcilarPoints(): List<LatLng> {
 
-        val feature = getBagcilarFeature() ?: return emptyList()
+        val feature =
+            getBagcilarFeature()
+                ?: return emptyList()
 
-        val geometry = feature.getJSONObject("geometry")
-        val coordinates = geometry.getJSONArray("coordinates")
-        val outerRing = coordinates.getJSONArray(0)
-        val points = mutableListOf<LatLng>()
+        val geometry =
+            feature.getJSONObject("geometry")
 
-        for(i in 0 until outerRing.length()){
-            val coordinate = outerRing.getJSONArray(i)
+        val coordinates =
+            geometry.getJSONArray("coordinates")
 
-            val longitude = coordinate.getDouble(0)
-            val latitude = coordinate.getDouble(1)
+        val outerRing =
+            coordinates.getJSONArray(0)
+
+        val points =
+            mutableListOf<LatLng>()
+
+        for (i in 0 until outerRing.length()) {
+
+            val coordinate =
+                outerRing.getJSONArray(i)
+
+            val longitude =
+                coordinate.getDouble(0)
+
+            val latitude =
+                coordinate.getDouble(1)
 
             points.add(
-                LatLng(latitude,longitude)
+                LatLng(
+                    latitude,
+                    longitude
+                )
             )
         }
 
         return points
     }
 
+    override fun onDestroyView() {
+
+        searchJob?.cancel()
+
+        super.onDestroyView()
+
+        _binding = null
+    }
 }

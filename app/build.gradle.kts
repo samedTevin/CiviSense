@@ -35,6 +35,18 @@ android {
 
         manifestPlaceholders["GOOGLE_MAPS_API_KEY"] = secretsProperties.getProperty("GOOGLE_MAPS_API_KEY", "")
 
+        buildConfigField(
+            "String",
+            "GOOGLE_MAPS_API_KEY",
+            "\"${secretsProperties.getProperty("GOOGLE_MAPS_API_KEY", "")}\""
+        )
+
+        println(
+            "GOOGLE MAPS KEY EMPTY: ${
+                secretsProperties.getProperty("GOOGLE_MAPS_API_KEY").isNullOrEmpty()
+            }"
+        )
+
     }
 
     buildTypes {
@@ -52,6 +64,7 @@ android {
     // ViewBinding
     buildFeatures {
         viewBinding = true
+        buildConfig = true
     }
 }
 
@@ -103,6 +116,11 @@ dependencies {
 
     implementation("io.noties.markwon:core:4.6.2")
 
+
+
+    // Location
     implementation(libs.play.services.maps)
+    implementation(libs.places)
+    implementation("com.google.android.gms:play-services-location:21.3.0")
 
 }

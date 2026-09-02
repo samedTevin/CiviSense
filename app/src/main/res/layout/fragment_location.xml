@@ -49,12 +49,12 @@
     </Toolbar>
 
     <SearchView
+        android:id="@+id/locationSearchView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:queryHint="Select Location..."
         android:inputType="text"
         android:iconifiedByDefault="false"
-        android:focusable="false"
         android:searchHintIcon="@null"
         android:elevation="8dp"
         android:layout_margin="20dp"
@@ -65,6 +65,22 @@
         android:backgroundTint="@color/white"
         android:padding="5dp"
         />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvPlacesResult"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:background="@color/white"
+        android:elevation="12dp"
+        android:overScrollMode="never"
+        android:visibility="gone"
+        app:layout_constraintTop_toBottomOf="@id/locationSearchView"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/locationCard"
+        tools:listitem="@layout/item_location_search" />
     
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fabCurrentLocation"
@@ -87,15 +103,15 @@
        app:layout_constraintStart_toStartOf="parent"
        app:layout_constraintEnd_toEndOf="parent"
        app:layout_constraintBottom_toBottomOf="parent"
-       android:layout_margin="20dp">
+       android:layout_margin="55dp">
        <androidx.constraintlayout.widget.ConstraintLayout
            android:layout_width="match_parent"
            android:layout_height="match_parent"
            android:layout_margin="20dp">
            <ImageView
                android:id="@+id/locationLogo"
-               android:layout_width="60dp"
-               android:layout_height="60dp"
+               android:layout_width="40dp"
+               android:layout_height="40dp"
                android:src="@drawable/ic_bagcilar_location"
                app:layout_constraintStart_toStartOf="parent"
                app:layout_constraintTop_toTopOf="parent"
@@ -106,7 +122,7 @@
                android:layout_width="wrap_content"
                android:layout_height="wrap_content"
                android:text="Select a Location"
-               android:textSize="18sp"
+               android:textSize="16sp"
                android:fontFamily="@font/poppins_semibold"
                app:layout_constraintStart_toEndOf="@id/locationLogo"
                app:layout_constraintTop_toTopOf="parent"
@@ -117,7 +133,7 @@
                android:layout_width="0dp"
                android:layout_height="wrap_content"
                android:text="Move the marker to choose adddd location"
-               android:textSize="14sp"
+               android:textSize="12sp"
                android:fontFamily="@font/poppins"
                android:textColor="@color/text_secondary"
                app:layout_constraintTop_toBottomOf="@id/tvAddress"
@@ -130,7 +146,7 @@
                android:layout_height="wrap_content"
                android:text="Select this location"
                android:fontFamily="@font/poppins_semibold"
-               android:textSize="16sp"
+               android:textSize="14sp"
                android:backgroundTint="@color/bagcilar_dark_blue"
                android:elevation="4dp"
                app:cornerRadius="10dp"
