@@ -10,7 +10,6 @@
   <a href="https://kotlinlang.org/"><img alt="Kotlin" src="https://img.shields.io/badge/Kotlin-2.0-7F52FF.svg"/></a>
   <a href="https://firebase.google.com/"><img alt="Firebase" src="https://img.shields.io/badge/Firebase-Auth%20%7C%20Firestore%20%7C%20AI-FFCA28.svg"/></a>
   <a href="https://linkedin.com/in/samedtevin"><img alt="LinkedIn" src="https://img.shields.io/badge/LinkedIn-Samed%20Tevin-0A66C2.svg"/></a>
-  <a href="https://github.com/SamedTevin"><img alt="Profile" src="https://skydoves.github.io/badges/skydoves.svg"/></a>
 </p><br>
 
 <p align="center">
