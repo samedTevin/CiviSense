@@ -5,12 +5,12 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".ui.main.detail.HelpAndSupportFragment"
-    android:background="@color/white"
-    android:layout_margin="20dp">
+    android:background="@color/white">
 
    <androidx.constraintlayout.widget.ConstraintLayout
        android:layout_width="match_parent"
-       android:layout_height="match_parent">
+       android:layout_height="match_parent"
+       android:padding="20dp">
        <Toolbar
            android:id="@+id/toolBar"
            android:layout_width="match_parent"

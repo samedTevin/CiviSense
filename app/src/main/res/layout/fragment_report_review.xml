@@ -4,7 +4,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".ui.main.detail.ReportReviewFragment">
+    tools:context=".ui.main.detail.ReportReviewFragment"
+    android:background="@color/white">
 
    <androidx.constraintlayout.widget.ConstraintLayout
        android:layout_width="match_parent"
@@ -105,6 +106,7 @@
                            android:layout_width="wrap_content"
                            android:layout_height="wrap_content"
                            android:text="Street Lighting"
+                           android:backgroundTint="@color/white"
                            android:textSize="16sp"
                            android:fontFamily="@font/poppins"
                            android:elevation="4dp"/>
@@ -127,6 +129,7 @@
                        <com.google.android.material.chip.Chip
                            android:layout_width="wrap_content"
                            android:layout_height="wrap_content"
+                           android:backgroundTint="@color/yellow"
                            android:text="Medium"
                            android:textSize="16sp"
                            android:fontFamily="@font/poppins"
